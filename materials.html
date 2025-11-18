@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Материалы - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        .search-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .search-bar button {
+            padding: 12px 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .material-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .material-header {
+            display: flex;
+            justify-content: between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .material-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .material-category {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .material-details {
+            margin-bottom: 20px;
+        }
+
+        .material-details p {
+            margin: 8px 0;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .material-stock {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .stock-info {
+            font-weight: bold;
+        }
+
+        .stock-available {
+            color: #27ae60;
+        }
+
+        .stock-low {
+            color: #e74c3c;
+        }
+
+        .material-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            border: 1px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🛠️ КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Система управления заявками на материалы для ремонта ковшей</div>
+        </header>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="requests.html">Заявки</a></li>
+                <li><a href="materials.html" class="active">Материалы</a></li>
+                <li><a href="reports.html">Отчеты</a></li>
+                <li><a href="employees.html">Сотрудники</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-header">
+            <h1>🛒 Каталог материалов</h1>
+            <p>Управление материалами для ремонта ковшей</p>
+        </div>
+
+        <div class="content">
+            <div class="search-bar">
+                <input type="text" placeholder="🔍 Поиск материалов...">
+                <button>Найти</button>
+                <button class="btn-success">+ Добавить материал</button>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active">Все материалы</button>
+                <button class="category-btn">Электроды</button>
+                <button class="category-btn">Сталь</button>
+                <button class="category-btn">Проволока</button>
+                <button class="category-btn">Комплектующие</button>
+                <button class="category-btn">Расходники</button>
+            </div>
+
+            <div class="materials-grid">
+                <div class="material-card">
+                    <div class="material-header">
+                        <div>
+                            <div class="material-name">Электроды Hardex 600</div>
+                            <div class="material-category">Электроды</div>
+                        </div>
+                    </div>
+                    <div class="material-details">
+                        <p><strong>Описание:</strong> Для наплавки с высокой износостойкостью</p>
+                        <p><strong>Характеристики:</strong> Диаметр 4.0 мм, время гелеобразования 45 мин</p>
+                        <p><strong>Единица:</strong> кг</p>
+                        <p><strong>Цена:</strong> 850 ₽/кг</p>
+                    </div>
+                    <div class="material-stock">
+                        <div class="stock-info stock-available">✓ В наличии: 125 кг</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary">Изменить</button>
+                        <button class="btn btn-warning">Заказать</button>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-header">
+                        <div>
+                            <div class="material-name">Сталь HARDOX 450</div>
+                            <div class="material-category">Сталь</div>
+                        </div>
+                    </div>
+                    <div class="material-details">
+                        <p><strong>Описание:</strong> Износостойкая сталь для стенок ковша</p>
+                        <p><strong>Характеристики:</strong> Толщина 10 мм, твердость 450 HB</p>
+                        <p><strong>Единица:</strong> лист</p>
+                        <p><strong>Цена:</strong> 12,500 ₽/лист</p>
+                    </div>
+                    <div class="material-stock">
+                        <div class="stock-info stock-low">⚠ Мало: 3 листа</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary">Изменить</button>
+                        <button class="btn btn-warning">Заказать</button>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-header">
+                        <div>
+                            <div class="material-name">Проволока ПП-АН170</div>
+                            <div class="material-category">Проволока</div>
+                        </div>
+                    </div>
+                    <div class="material-details">
+                        <p><strong>Описание:</strong> Порошковая проволока для наплавки зубьев</p>
+                        <p><strong>Характеристики:</strong> Диаметр 2.8 мм, скорость наплавки 4.5 кг/ч</p>
+                        <p><strong>Единица:</strong> кг</p>
+                        <p><strong>Цена:</strong> 1,200 ₽/кг</p>
+                    </div>
+                    <div class="material-stock">
+                        <div class="stock-info stock-available">✓ В наличии: 85 кг</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary">Изменить</button>
+                        <button class="btn btn-warning">Заказать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Система управления заявками "Ковшей-Сервис". Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        let currentCategory = 'Все материалы';
+        let currentSearch = '';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем авторизацию
+            const user = getCurrentUser();
+            if (!user) {
+                alert('Необходима авторизация для доступа к этой странице.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            if (!window.appData) {
+                loadData().then(() => initMaterialsPage());
+            } else {
+                initMaterialsPage();
+            }
+        });
+
+        function initMaterialsPage() {
+            updateMaterialsList();
+            
+            // Категории
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.textContent;
+                    updateMaterialsList();
+                });
+            });
+
+            // Поиск
+            const searchInput = document.querySelector('.search-bar input');
+            const searchBtn = document.querySelector('.search-bar button');
+            searchBtn.addEventListener('click', () => {
+                currentSearch = searchInput.value;
+                updateMaterialsList();
+            });
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    currentSearch = searchInput.value;
+                    updateMaterialsList();
+                }
+            });
+
+            // Кнопка добавления (только если есть права)
+            const addBtn = document.querySelector('.btn-success');
+            if (addBtn && hasPermission('canAddMaterial')) {
+                addBtn.addEventListener('click', () => showMaterialForm());
+            } else if (addBtn) {
+                addBtn.style.display = 'none';
+            }
+        }
+
+        function updateMaterialsList() {
+            const materials = searchMaterials(currentSearch, currentCategory);
+            const grid = document.querySelector('.materials-grid');
+            grid.innerHTML = '';
+            
+            materials.forEach(material => {
+                const card = createMaterialCard(material);
+                grid.appendChild(card);
+            });
+        }
+
+        function createMaterialCard(material) {
+            const card = document.createElement('div');
+            card.className = 'material-card';
+            const stockClass = material.stock > 10 ? 'stock-available' : 'stock-low';
+            const stockText = material.stock > 10 ? `✓ В наличии: ${material.stock} ${material.unit}` : `⚠ Мало: ${material.stock} ${material.unit}`;
+            
+            card.innerHTML = `
+                <div class="material-header">
+                    <div>
+                        <div class="material-name">${material.name}</div>
+                        <div class="material-category">${material.category}</div>
+                    </div>
+                </div>
+                <div class="material-details">
+                    <p><strong>Описание:</strong> ${material.description}</p>
+                    <p><strong>Характеристики:</strong> ${material.specifications}</p>
+                    <p><strong>Единица:</strong> ${material.unit}</p>
+                    <p><strong>Цена:</strong> ${material.price.toLocaleString()} ₽/${material.unit}</p>
+                </div>
+                <div class="material-stock">
+                    <div class="stock-info ${stockClass}">${stockText}</div>
+                </div>
+                <div class="material-actions">
+                    ${hasPermission('canEditMaterial') ? `<button class="btn btn-primary" onclick="editMaterial('${material.id}')">Изменить</button>` : ''}
+                    ${hasPermission('canOrderMaterial') ? `<button class="btn btn-warning" onclick="orderMaterial('${material.id}')">Заказать</button>` : ''}
+                </div>
+            `;
+            return card;
+        }
+
+        function showMaterialForm(material = null) {
+            const isEdit = !!material;
+            const content = `
+                <form id="materialForm" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Название:</label>
+                    <input type="text" id="mat-name" value="${material ? material.name : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Категория:</label>
+                    <select id="mat-category" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="">Выберите категорию</option>
+                        <option value="Электроды" ${material && material.category === 'Электроды' ? 'selected' : ''}>Электроды</option>
+                        <option value="Сталь" ${material && material.category === 'Сталь' ? 'selected' : ''}>Сталь</option>
+                        <option value="Проволока" ${material && material.category === 'Проволока' ? 'selected' : ''}>Проволока</option>
+                        <option value="Комплектующие" ${material && material.category === 'Комплектующие' ? 'selected' : ''}>Комплектующие</option>
+                        <option value="Расходники" ${material && material.category === 'Расходники' ? 'selected' : ''}>Расходники</option>
+                    </select></div>
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Описание:</label>
+                    <textarea id="mat-description" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; min-height: 60px;">${material ? material.description : ''}</textarea></div>
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Характеристики:</label>
+                    <input type="text" id="mat-specs" value="${material ? material.specifications : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Единица измерения:</label>
+                    <input type="text" id="mat-unit" value="${material ? material.unit : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Цена (₽):</label>
+                    <input type="number" id="mat-price" value="${material ? material.price : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Остаток на складе:</label>
+                    <input type="number" id="mat-stock" value="${material ? material.stock : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                </form>
+            `;
+            
+            createModal(isEdit ? 'Редактировать материал' : 'Добавить материал', content, [
+                { text: 'Отмена', onclick: 'closeModal()', class: 'btn-secondary' },
+                { text: isEdit ? 'Сохранить' : 'Добавить', onclick: `saveMaterialForm('${material ? material.id : ''}')`, class: 'btn-success' }
+            ]);
+        }
+
+        function saveMaterialForm(materialId) {
+            if (materialId && !hasPermission('canEditMaterial')) {
+                alert('У вас нет прав для редактирования материалов.');
+                return;
+            }
+            if (!materialId && !hasPermission('canAddMaterial')) {
+                alert('У вас нет прав для добавления материалов.');
+                return;
+            }
+            
+            const materialData = {
+                name: document.getElementById('mat-name').value,
+                category: document.getElementById('mat-category').value,
+                description: document.getElementById('mat-description').value,
+                specifications: document.getElementById('mat-specs').value,
+                unit: document.getElementById('mat-unit').value,
+                price: parseFloat(document.getElementById('mat-price').value),
+                stock: parseFloat(document.getElementById('mat-stock').value)
+            };
+            
+            if (materialId) {
+                const result = updateMaterial(materialId, materialData);
+                if (result.success) {
+                    alert('Материал обновлен!');
+                    closeModal();
+                    updateMaterialsList();
+                }
+            } else {
+                const result = addMaterial(materialData);
+                if (result.success) {
+                    alert('Материал добавлен!');
+                    closeModal();
+                    updateMaterialsList();
+                }
+            }
+        }
+
+        function editMaterial(id) {
+            if (!hasPermission('canEditMaterial')) {
+                alert('У вас нет прав для редактирования материалов.');
+                return;
+            }
+            const material = window.appData.materials.find(m => m.id === id);
+            if (material) showMaterialForm(material);
+        }
+
+        // Функция orderMaterial теперь находится в app.js
+        // При заказе материала автоматически создается заявка в разделе "Заявки"
+    </script>
+</body>
+</html>

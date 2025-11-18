@@ -1,0 +1,185 @@
+{
+  "users": [
+    {
+      "id": "USR-001",
+      "email": "ivanov@kovshey-service.ru",
+      "password": "password123",
+      "firstName": "Алексей",
+      "lastName": "Иванов",
+      "middleName": "Петрович",
+      "employeeId": "EMP-001",
+      "role": "employee",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "USR-002",
+      "email": "petrov@kovshey-service.ru",
+      "password": "password123",
+      "firstName": "Сергей",
+      "lastName": "Петров",
+      "middleName": "Владимирович",
+      "employeeId": "EMP-002",
+      "role": "manager",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "USR-003",
+      "email": "sidorova@kovshey-service.ru",
+      "password": "password123",
+      "firstName": "Мария",
+      "lastName": "Сидорова",
+      "middleName": "Ивановна",
+      "employeeId": "EMP-003",
+      "role": "procurement",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "USR-004",
+      "email": "admin@kovshey-service.ru",
+      "password": "admin123",
+      "firstName": "Дмитрий",
+      "lastName": "Козлов",
+      "middleName": "Анатольевич",
+      "employeeId": "EMP-004",
+      "role": "admin",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "sessions": [],
+  "requests": [
+    {
+      "id": "З-2024-001",
+      "material": "Электроды Hardex 600",
+      "quantity": "25 кг",
+      "bucketType": "Экскаваторный 1.8м³",
+      "customer": "ООО \"ГранитСтрой\"",
+      "createdDate": "10.01.2024",
+      "status": "approved",
+      "amount": 21250,
+      "createdBy": "USR-001",
+      "updatedAt": "2024-01-10T00:00:00Z"
+    },
+    {
+      "id": "З-2024-002",
+      "material": "Сталь Hardox 450",
+      "quantity": "3 листа",
+      "bucketType": "Погрузочный 5.5м³",
+      "customer": "ЗАО \"КарьерСевер\"",
+      "createdDate": "12.01.2024",
+      "status": "pending",
+      "amount": 37500,
+      "createdBy": "USR-001",
+      "updatedAt": "2024-01-12T00:00:00Z"
+    },
+    {
+      "id": "З-2024-003",
+      "material": "Проволока ПП-АН170",
+      "quantity": "15 кг",
+      "bucketType": "Карьерный 8м³",
+      "customer": "ПАО \"Рудник\"",
+      "createdDate": "14.01.2024",
+      "status": "draft",
+      "amount": 18000,
+      "createdBy": "USR-001",
+      "updatedAt": "2024-01-14T00:00:00Z"
+    }
+  ],
+  "materials": [
+    {
+      "id": "MAT-001",
+      "name": "Электроды Hardex 600",
+      "category": "Электроды",
+      "description": "Для наплавки с высокой износостойкостью",
+      "specifications": "Диаметр 4.0 мм, время гелеобразования 45 мин",
+      "unit": "кг",
+      "price": 850,
+      "stock": 125,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "MAT-002",
+      "name": "Сталь HARDOX 450",
+      "category": "Сталь",
+      "description": "Износостойкая сталь для стенок ковша",
+      "specifications": "Толщина 10 мм, твердость 450 HB",
+      "unit": "лист",
+      "price": 12500,
+      "stock": 3,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "MAT-003",
+      "name": "Проволока ПП-АН170",
+      "category": "Проволока",
+      "description": "Порошковая проволока для наплавки зубьев",
+      "specifications": "Диаметр 2.8 мм, скорость наплавки 4.5 кг/ч",
+      "unit": "кг",
+      "price": 1200,
+      "stock": 85,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "employees": [
+    {
+      "id": "EMP-001",
+      "firstName": "Алексей",
+      "lastName": "Иванов",
+      "middleName": "Петрович",
+      "position": "Сварщик 5 разряда",
+      "department": "Цех сварки и наплавки",
+      "email": "ivanov@kovshey-service.ru",
+      "role": "employee",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "EMP-002",
+      "firstName": "Сергей",
+      "lastName": "Петров",
+      "middleName": "Владимирович",
+      "position": "Начальник цеха",
+      "department": "Цех сварки и наплавки",
+      "email": "petrov@kovshey-service.ru",
+      "role": "manager",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "EMP-003",
+      "firstName": "Мария",
+      "lastName": "Сидорова",
+      "middleName": "Ивановна",
+      "position": "Менеджер по закупкам",
+      "department": "Отдел закупок",
+      "email": "sidorova@kovshey-service.ru",
+      "role": "procurement",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "EMP-004",
+      "firstName": "Дмитрий",
+      "lastName": "Козлов",
+      "middleName": "Анатольевич",
+      "position": "Системный администратор",
+      "department": "IT отдел",
+      "email": "admin@kovshey-service.ru",
+      "role": "admin",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "reports": [],
+  "settings": {
+    "lastUpdate": "2024-01-15T00:00:00Z",
+    "version": "1.0.0"
+  }
+}
+
