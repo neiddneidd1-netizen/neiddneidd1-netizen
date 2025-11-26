@@ -1686,15 +1686,15 @@ function loadProfileOverview() {
     
     // Статистика для всех ролей
     statsHTML += `
-        <div class="stat-card" style="background: #34495e;">
+        <div class="stat-card" style="background: #2980b9;">
             <div class="number">${stats.myRequests}</div>
             <div class="label">Мои заявки</div>
         </div>
-        <div class="stat-card" style="background: #34495e;">
+        <div class="stat-card" style="background: #2980b9;">
             <div class="number">${stats.approvedRequests}</div>
             <div class="label">Утверждено</div>
         </div>
-        <div class="stat-card" style="background: #34495e;">
+        <div class="stat-card" style="background: #2980b9;">
             <div class="number">${stats.pendingRequests}</div>
             <div class="label">На согласовании</div>
         </div>
@@ -1703,7 +1703,7 @@ function loadProfileOverview() {
     // Дополнительная статистика для менеджеров, закупок и админов
     if (user.role === 'admin' || user.role === 'manager' || user.role === 'procurement') {
         statsHTML += `
-            <div class="stat-card" style="background: #34495e;">
+            <div class="stat-card" style="background: #2980b9;">
                 <div class="number">${allStats.totalRequests}</div>
                 <div class="label">Всего заявок</div>
             </div>
@@ -1713,11 +1713,11 @@ function loadProfileOverview() {
     // Статистика для администратора
     if (user.role === 'admin') {
         statsHTML += `
-            <div class="stat-card" style="background: #34495e;">
+            <div class="stat-card" style="background: #2980b9;">
                 <div class="number">${(window.appData.users || []).length}</div>
                 <div class="label">Пользователей</div>
             </div>
-            <div class="stat-card" style="background: #34495e;">
+            <div class="stat-card" style="background: #2980b9;">
                 <div class="number">${(window.appData.materials || []).length}</div>
                 <div class="label">Материалов</div>
             </div>

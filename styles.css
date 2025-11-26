@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #34495e;
+    background: #2c3e50;
     min-height: 100vh;
     padding: 20px;
 }
@@ -22,7 +22,7 @@ body {
 }
 
 header {
-    background: #34495e;
+    background: #2980b9;
     color: white;
     padding: 30px;
     text-align: center;
@@ -40,7 +40,7 @@ header {
 }
 
 nav {
-    background: #34495e;
+    background: #2980b9;
     padding: 0;
 }
 
@@ -181,7 +181,7 @@ body.login-page {
 }
 
 .left-panel {
-    background: #34495e;
+    background: #2980b9;
     color: white;
     padding: 60px 40px;
     display: flex;
@@ -339,7 +339,7 @@ body.login-page {
 }
 
 .btn-demo {
-    background: #34495e;
+    background: #2980b9;
     color: white;
     margin-top: 15px;
 }
@@ -384,7 +384,7 @@ body.login-page {
 }
 
 .register-header-section {
-    background: #34495e;
+    background: #2980b9;
     color: white;
     padding: 30px;
     margin: -40px -40px 30px -40px;
@@ -470,7 +470,7 @@ body.login-page {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #34495e;
+    background: #2980b9;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -568,7 +568,7 @@ body.login-page {
 }
 
 .stat-card {
-    background: #34495e;
+    background: #2980b9;
     color: white;
     padding: 20px;
     border-radius: 10px;
@@ -733,7 +733,7 @@ body.login-page {
 
 .role-info-card {
     grid-column: 1 / -1;
-    background: #34495e;
+    background: #2980b9;
     color: white;
     border-left: 4px solid white;
 }

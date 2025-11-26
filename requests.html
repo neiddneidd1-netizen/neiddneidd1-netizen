@@ -92,6 +92,15 @@
         .request-actions {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .request-actions .btn {
+            flex: 0 1 auto;
+            min-width: 100px;
+            max-width: 100%;
+            white-space: nowrap;
+            box-sizing: border-box;
         }
 
         .btn {
@@ -386,7 +395,7 @@
                     ${request.amount ? `<p><strong>Сумма:</strong> ${request.amount.toLocaleString()} ₽</p>` : ''}
                 </div>
                 <div class="request-actions">
-                    <button class="btn btn-primary" onclick="showRequestDetails('${request.id}')">Просмотр</button>
+                    <button class="btn btn-primary" onclick="showRequestDetails('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Просмотр</button>
                     ${getActionButtons(request)}
                 </div>
             `;
@@ -404,31 +413,31 @@
             // Черновик - только владелец может редактировать и отправлять
             if (request.status === 'draft') {
                 if (isOwner && hasPermission('canEditOwnRequest')) {
-                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')">Редактировать</button>`;
+                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Редактировать</button>`;
                 }
                 if (isOwner && hasPermission('canSendRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')">Отправить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Отправить</button>`;
                 }
             } 
             // На согласовании - только менеджеры и админы могут утверждать/отклонять
             else if (request.status === 'pending') {
                 if (hasPermission('canApproveRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')">Утвердить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Утвердить</button>`;
                 }
                 if (hasPermission('canRejectRequest')) {
-                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')">Отклонить</button>`;
+                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Отклонить</button>`;
                 }
             } 
             // Утверждена - только закупки и админы могут завершать
             else if (request.status === 'approved') {
                 if (hasPermission('canCompleteRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')">Завершить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Завершить</button>`;
                 }
             }
             
             // Удаление - только админы
             if (hasPermission('canDeleteRequest')) {
-                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')" style="background: #e74c3c;">Удалить</button>`;
+                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')" style="background: #e74c3c; flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Удалить</button>`;
             }
             
             return buttons;
