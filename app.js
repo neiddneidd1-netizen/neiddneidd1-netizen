@@ -31,7 +31,7 @@ function addProfileLink() {
         // Если не авторизован, возвращаем "Вход"
         if (profileLink) {
             profileLink.href = 'login.html';
-            profileLink.innerHTML = '🔑 Вход';
+            profileLink.innerHTML = 'Вход';
         }
     }
 }
@@ -682,7 +682,7 @@ function displayCurrentUser() {
         // Если пользователь не авторизован, можно добавить ссылку на вход
         const loginLink = nav.querySelector('a[href="login.html"]');
         if (loginLink) {
-            loginLink.innerHTML = '🔑 Вход';
+            loginLink.innerHTML = 'Вход';
         }
     }
 }
@@ -1839,7 +1839,7 @@ function loadAdminPanel() {
     
     const adminHTML = `
         <div class="admin-card" onclick="window.location.href='employees.html'">
-            <h3>👥 Управление сотрудниками</h3>
+            <h3>Управление сотрудниками</h3>
             <p>Добавление, редактирование и удаление сотрудников</p>
         </div>
         <div class="admin-card" onclick="window.location.href='materials.html'">
