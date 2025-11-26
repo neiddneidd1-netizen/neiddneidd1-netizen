@@ -1339,9 +1339,49 @@ body.login-page {
     color: white;
 }
 
+/* Стили для поиска на странице материалов */
+.search-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.search-bar button {
+    padding: 12px 30px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+.search-bar button:hover {
+    background: #2980b9;
+}
+
 @media (max-width: 768px) {
     .materials-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .search-bar {
+        flex-direction: column;
+    }
+    
+    .search-bar input,
+    .search-bar button {
+        width: 100%;
     }
 }
 

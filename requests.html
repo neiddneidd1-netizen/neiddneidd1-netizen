@@ -225,7 +225,7 @@
                     ${request.amount ? `<p><strong>Сумма:</strong> ${request.amount.toLocaleString()} ₽</p>` : ''}
                 </div>
                 <div class="request-actions">
-                    <button class="btn btn-primary" onclick="showRequestDetails('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Просмотр</button>
+                    <button class="btn btn-primary" onclick="showRequestDetails('${request.id}')">Просмотр</button>
                     ${getActionButtons(request)}
                 </div>
             `;
@@ -243,31 +243,31 @@
             // Черновик - только владелец может редактировать и отправлять
             if (request.status === 'draft') {
                 if (isOwner && hasPermission('canEditOwnRequest')) {
-                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Редактировать</button>`;
+                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')">Редактировать</button>`;
                 }
                 if (isOwner && hasPermission('canSendRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Отправить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')">Отправить</button>`;
                 }
             } 
             // На согласовании - только менеджеры и админы могут утверждать/отклонять
             else if (request.status === 'pending') {
                 if (hasPermission('canApproveRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Утвердить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')">Утвердить</button>`;
                 }
                 if (hasPermission('canRejectRequest')) {
-                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Отклонить</button>`;
+                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')">Отклонить</button>`;
                 }
             } 
             // Утверждена - только закупки и админы могут завершать
             else if (request.status === 'approved') {
                 if (hasPermission('canCompleteRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Завершить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')">Завершить</button>`;
                 }
             }
             
             // Удаление - только админы
             if (hasPermission('canDeleteRequest')) {
-                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')" style="background: #e74c3c; flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Удалить</button>`;
+                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')">Удалить</button>`;
             }
             
             return buttons;
@@ -296,7 +296,7 @@
             if (!request) return;
             
             const content = `
-                <div style="line-height: 1.8;">
+                <div class="request-details">
                     <p><strong>ID:</strong> ${request.id}</p>
                     <p><strong>Материал:</strong> ${request.material}</p>
                     <p><strong>Количество:</strong> ${request.quantity}</p>
@@ -416,31 +416,31 @@
         function showRequestForm(request = null) {
             const isEdit = !!request;
             const content = `
-                <form id="requestForm" style="display: flex; flex-direction: column; gap: 15px;">
-                    <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Материал:</label>
-                        <input type="text" id="req-material" value="${request ? request.material : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <form id="requestForm">
+                    <div class="form-group">
+                        <label for="req-material">Материал:</label>
+                        <input type="text" id="req-material" value="${request ? request.material : ''}" required>
                     </div>
-                    <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Количество:</label>
-                        <input type="text" id="req-quantity" value="${request ? request.quantity : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <div class="form-group">
+                        <label for="req-quantity">Количество:</label>
+                        <input type="text" id="req-quantity" value="${request ? request.quantity : ''}" required>
                     </div>
-                    <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Тип ковша:</label>
-                        <select id="req-bucketType" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <div class="form-group">
+                        <label for="req-bucketType">Тип ковша:</label>
+                        <select id="req-bucketType" required>
                             <option value="">Выберите тип</option>
                             <option value="Экскаваторный" ${request && request.bucketType.includes('Экскаваторный') ? 'selected' : ''}>Экскаваторный</option>
                             <option value="Погрузочный" ${request && request.bucketType.includes('Погрузочный') ? 'selected' : ''}>Погрузочный</option>
                             <option value="Карьерный" ${request && request.bucketType.includes('Карьерный') ? 'selected' : ''}>Карьерный</option>
                         </select>
                     </div>
-                    <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Заказчик:</label>
-                        <input type="text" id="req-customer" value="${request ? request.customer : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <div class="form-group">
+                        <label for="req-customer">Заказчик:</label>
+                        <input type="text" id="req-customer" value="${request ? request.customer : ''}" required>
                     </div>
-                    <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Сумма (₽):</label>
-                        <input type="number" id="req-amount" value="${request ? request.amount : ''}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <div class="form-group">
+                        <label for="req-amount">Сумма (₽):</label>
+                        <input type="number" id="req-amount" value="${request ? request.amount : ''}">
                     </div>
                 </form>
             `;

@@ -220,28 +220,42 @@
         function showMaterialForm(material = null) {
             const isEdit = !!material;
             const content = `
-                <form id="materialForm" style="display: flex; flex-direction: column; gap: 15px;">
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Название:</label>
-                    <input type="text" id="mat-name" value="${material ? material.name : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Категория:</label>
-                    <select id="mat-category" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                        <option value="">Выберите категорию</option>
-                        <option value="Электроды" ${material && material.category === 'Электроды' ? 'selected' : ''}>Электроды</option>
-                        <option value="Сталь" ${material && material.category === 'Сталь' ? 'selected' : ''}>Сталь</option>
-                        <option value="Проволока" ${material && material.category === 'Проволока' ? 'selected' : ''}>Проволока</option>
-                        <option value="Комплектующие" ${material && material.category === 'Комплектующие' ? 'selected' : ''}>Комплектующие</option>
-                        <option value="Расходники" ${material && material.category === 'Расходники' ? 'selected' : ''}>Расходники</option>
-                    </select></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Описание:</label>
-                    <textarea id="mat-description" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; min-height: 60px;">${material ? material.description : ''}</textarea></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Характеристики:</label>
-                    <input type="text" id="mat-specs" value="${material ? material.specifications : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Единица измерения:</label>
-                    <input type="text" id="mat-unit" value="${material ? material.unit : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Цена (₽):</label>
-                    <input type="number" id="mat-price" value="${material ? material.price : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Остаток на складе:</label>
-                    <input type="number" id="mat-stock" value="${material ? material.stock : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                <form id="materialForm">
+                    <div class="form-group">
+                        <label for="mat-name">Название:</label>
+                        <input type="text" id="mat-name" value="${material ? material.name : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-category">Категория:</label>
+                        <select id="mat-category" required>
+                            <option value="">Выберите категорию</option>
+                            <option value="Электроды" ${material && material.category === 'Электроды' ? 'selected' : ''}>Электроды</option>
+                            <option value="Сталь" ${material && material.category === 'Сталь' ? 'selected' : ''}>Сталь</option>
+                            <option value="Проволока" ${material && material.category === 'Проволока' ? 'selected' : ''}>Проволока</option>
+                            <option value="Комплектующие" ${material && material.category === 'Комплектующие' ? 'selected' : ''}>Комплектующие</option>
+                            <option value="Расходники" ${material && material.category === 'Расходники' ? 'selected' : ''}>Расходники</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-description">Описание:</label>
+                        <textarea id="mat-description" required>${material ? material.description : ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-specs">Характеристики:</label>
+                        <input type="text" id="mat-specs" value="${material ? material.specifications : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-unit">Единица измерения:</label>
+                        <input type="text" id="mat-unit" value="${material ? material.unit : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-price">Цена (₽):</label>
+                        <input type="number" id="mat-price" value="${material ? material.price : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-stock">Остаток на складе:</label>
+                        <input type="number" id="mat-stock" value="${material ? material.stock : ''}" required>
+                    </div>
                 </form>
             `;
             
