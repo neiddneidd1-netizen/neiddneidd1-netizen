@@ -8,7 +8,7 @@
     <style>
 
         .filters {
-            background: #f8f9fa;
+            background: #bbdefb;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 30px;
@@ -43,8 +43,8 @@
         }
 
         .request-card {
-            background: white;
-            border: 1px solid #e9ecef;
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -93,14 +93,18 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .request-actions .btn {
             flex: 0 1 auto;
             min-width: 100px;
-            max-width: 100%;
+            max-width: calc(50% - 5px);
             white-space: nowrap;
             box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .btn {
@@ -413,31 +417,31 @@
             // Черновик - только владелец может редактировать и отправлять
             if (request.status === 'draft') {
                 if (isOwner && hasPermission('canEditOwnRequest')) {
-                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Редактировать</button>`;
+                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Редактировать</button>`;
                 }
                 if (isOwner && hasPermission('canSendRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Отправить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Отправить</button>`;
                 }
             } 
             // На согласовании - только менеджеры и админы могут утверждать/отклонять
             else if (request.status === 'pending') {
                 if (hasPermission('canApproveRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Утвердить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Утвердить</button>`;
                 }
                 if (hasPermission('canRejectRequest')) {
-                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Отклонить</button>`;
+                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Отклонить</button>`;
                 }
             } 
             // Утверждена - только закупки и админы могут завершать
             else if (request.status === 'approved') {
                 if (hasPermission('canCompleteRequest')) {
-                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Завершить</button>`;
+                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')" style="flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Завершить</button>`;
                 }
             }
             
             // Удаление - только админы
             if (hasPermission('canDeleteRequest')) {
-                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')" style="background: #e74c3c; flex: 0 1 auto; min-width: 100px; max-width: 100%; white-space: nowrap; box-sizing: border-box;">Удалить</button>`;
+                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')" style="background: #e74c3c; flex: 0 1 auto; min-width: 100px; max-width: calc(50% - 5px); white-space: nowrap; box-sizing: border-box;">Удалить</button>`;
             }
             
             return buttons;
