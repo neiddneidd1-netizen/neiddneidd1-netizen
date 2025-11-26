@@ -31,9 +31,9 @@
 
         <div class="content">
             <div class="search-bar">
-                <input type="text" placeholder="Поиск материалов...">
-                <button>Найти</button>
-                <button class="btn-success">+ Добавить материал</button>
+                <input type="text" id="materialSearchInput" placeholder="Поиск материалов...">
+                <button id="searchBtn" class="btn btn-primary">Найти</button>
+                <button id="addMaterialBtn" class="btn btn-success">+ Добавить материал</button>
             </div>
 
             <div class="categories">
@@ -63,8 +63,8 @@
                         <div class="stock-info stock-available">✓ В наличии: 125 кг</div>
                     </div>
                     <div class="material-actions">
-                        <button class="btn btn-primary">Изменить</button>
-                        <button class="btn btn-warning">Заказать</button>
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-1')">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-1')">Заказать</button>
                     </div>
                 </div>
 
@@ -85,8 +85,8 @@
                         <div class="stock-info stock-low">⚠ Мало: 3 листа</div>
                     </div>
                     <div class="material-actions">
-                        <button class="btn btn-primary">Изменить</button>
-                        <button class="btn btn-warning">Заказать</button>
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-1')">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-1')">Заказать</button>
                     </div>
                 </div>
 
@@ -107,8 +107,8 @@
                         <div class="stock-info stock-available">✓ В наличии: 85 кг</div>
                     </div>
                     <div class="material-actions">
-                        <button class="btn btn-primary">Изменить</button>
-                        <button class="btn btn-warning">Заказать</button>
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-1')">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-1')">Заказать</button>
                     </div>
                 </div>
             </div>
@@ -153,26 +153,30 @@
                 });
             });
 
-            // Поиск
-            const searchInput = document.querySelector('.search-bar input');
-            const searchBtn = document.querySelector('.search-bar button');
-            searchBtn.addEventListener('click', () => {
-                currentSearch = searchInput.value;
-                updateMaterialsList();
-            });
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
+            // Поиск - исправленный селектор
+            const searchInput = document.getElementById('materialSearchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            if (searchInput && searchBtn) {
+                searchBtn.addEventListener('click', () => {
                     currentSearch = searchInput.value;
                     updateMaterialsList();
-                }
-            });
+                });
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        currentSearch = searchInput.value;
+                        updateMaterialsList();
+                    }
+                });
+            }
 
-            // Кнопка добавления (только если есть права)
-            const addBtn = document.querySelector('.btn-success');
-            if (addBtn && hasPermission('canAddMaterial')) {
-                addBtn.addEventListener('click', () => showMaterialForm());
-            } else if (addBtn) {
-                addBtn.style.display = 'none';
+            // Кнопка добавления - исправленный селектор
+            const addBtn = document.getElementById('addMaterialBtn');
+            if (addBtn) {
+                if (hasPermission('canAddMaterial')) {
+                    addBtn.addEventListener('click', () => showMaterialForm());
+                } else {
+                    addBtn.style.display = 'none';
+                }
             }
         }
 
@@ -311,7 +315,89 @@
             if (material) showMaterialForm(material);
         }
 
-        // Функция orderMaterial теперь находится в app.js
+        // Функции для статичных карточек материалов
+        function editMaterialStatic(materialId) {
+            // Пытаемся найти материал в данных
+            const material = window.appData && window.appData.materials 
+                ? window.appData.materials.find(m => m.id === materialId) 
+                : null;
+            
+            if (material) {
+                editMaterial(materialId);
+            } else {
+                // Если материала нет в данных, создаем временный объект из статичной карточки
+                const card = event.target.closest('.material-card');
+                if (card) {
+                    const name = card.querySelector('.material-name').textContent;
+                    const category = card.querySelector('.material-category').textContent;
+                    const details = card.querySelectorAll('.material-details p');
+                    
+                    const tempMaterial = {
+                        id: materialId,
+                        name: name,
+                        category: category,
+                        description: details[0] ? details[0].textContent.replace('Описание:', '').trim() : '',
+                        specifications: details[1] ? details[1].textContent.replace('Характеристики:', '').trim() : '',
+                        unit: details[2] ? details[2].textContent.replace('Единица:', '').trim() : '',
+                        price: details[3] ? parseFloat(details[3].textContent.replace(/[^\d]/g, '')) : 0,
+                        stock: 0
+                    };
+                    
+                    if (hasPermission('canEditMaterial')) {
+                        showMaterialForm(tempMaterial);
+                    } else {
+                        alert('У вас нет прав для редактирования материалов.');
+                    }
+                }
+            }
+        }
+
+        function orderMaterialStatic(materialId) {
+            // Пытаемся найти материал в данных
+            if (window.appData && window.appData.materials) {
+                const material = window.appData.materials.find(m => m.id === materialId);
+                if (material) {
+                    if (typeof orderMaterial === 'function') {
+                        orderMaterial(materialId);
+                    } else {
+                        alert('Функция заказа материала недоступна. Пожалуйста, перезагрузите страницу.');
+                    }
+                    return;
+                }
+            }
+            
+            // Если материала нет в данных, создаем заявку из статичной карточки
+            const card = event.target.closest('.material-card');
+            if (card) {
+                const name = card.querySelector('.material-name').textContent;
+                const details = card.querySelectorAll('.material-details p');
+                const quantity = prompt(`Введите количество для заказа материала "${name}":`);
+                
+                if (quantity && !isNaN(quantity) && parseFloat(quantity) > 0) {
+                    if (hasPermission('canOrderMaterial')) {
+                        // Создаем заявку
+                        const requestData = {
+                            material: name,
+                            quantity: quantity + ' ' + (details[2] ? details[2].textContent.replace('Единица:', '').trim() : 'шт'),
+                            bucketType: 'Не указан',
+                            customer: 'Внутренний заказ',
+                            amount: details[3] ? parseFloat(details[3].textContent.replace(/[^\d]/g, '')) * parseFloat(quantity) : 0
+                        };
+                        
+                        const result = addRequest(requestData);
+                        if (result.success) {
+                            alert('Заявка на материал создана! Перейдите в раздел "Заявки" для просмотра.');
+                        } else {
+                            alert('Ошибка при создании заявки.');
+                        }
+                    } else {
+                        alert('У вас нет прав для заказа материалов.');
+                    }
+                }
+            }
+        }
+
+        // Функция orderMaterial находится в app.js
         // При заказе материала автоматически создается заявка в разделе "Заявки"
     </script>
 </body>
