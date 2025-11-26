@@ -63,8 +63,8 @@
                         <div class="stock-info stock-available">✓ В наличии: 125 кг</div>
                     </div>
                     <div class="material-actions">
-                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-1')">Изменить</button>
-                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-1')">Заказать</button>
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-1', event)">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-1', event)">Заказать</button>
                     </div>
                 </div>
 
@@ -85,8 +85,8 @@
                         <div class="stock-info stock-low">⚠ Мало: 3 листа</div>
                     </div>
                     <div class="material-actions">
-                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-2')">Изменить</button>
-                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-2')">Заказать</button>
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-2', event)">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-2', event)">Заказать</button>
                     </div>
                 </div>
 
@@ -107,8 +107,8 @@
                         <div class="stock-info stock-available">✓ В наличии: 85 кг</div>
                     </div>
                     <div class="material-actions">
-                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-3')">Изменить</button>
-                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-3')">Заказать</button>
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-3', event)">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-3', event)">Заказать</button>
                     </div>
                 </div>
             </div>
@@ -316,7 +316,7 @@
         }
 
         // Функции для статичных карточек материалов
-        function editMaterialStatic(materialId) {
+        function editMaterialStatic(materialId, event) {
             // Пытаемся найти материал в данных
             const material = window.appData && window.appData.materials 
                 ? window.appData.materials.find(m => m.id === materialId) 
@@ -326,7 +326,9 @@
                 editMaterial(materialId);
             } else {
                 // Если материала нет в данных, создаем временный объект из статичной карточки
-                const card = event.target.closest('.material-card');
+                const button = event ? event.target : document.querySelector(`button[onclick*="editMaterialStatic('${materialId}')"]`);
+                const card = button ? button.closest('.material-card') : null;
+                
                 if (card) {
                     const name = card.querySelector('.material-name').textContent;
                     const category = card.querySelector('.material-category').textContent;
@@ -352,7 +354,7 @@
             }
         }
 
-        function orderMaterialStatic(materialId) {
+        function orderMaterialStatic(materialId, event) {
             // Пытаемся найти материал в данных
             if (window.appData && window.appData.materials) {
                 const material = window.appData.materials.find(m => m.id === materialId);
@@ -367,7 +369,9 @@
             }
             
             // Если материала нет в данных, создаем заявку из статичной карточки
-            const card = event.target.closest('.material-card');
+            const button = event ? event.target : document.querySelector(`button[onclick*="orderMaterialStatic('${materialId}')"]`);
+            const card = button ? button.closest('.material-card') : null;
+            
             if (card) {
                 const name = card.querySelector('.material-name').textContent;
                 const details = card.querySelectorAll('.material-details p');
@@ -376,12 +380,17 @@
                 if (quantity && !isNaN(quantity) && parseFloat(quantity) > 0) {
                     if (hasPermission('canOrderMaterial')) {
                         // Создаем заявку
+                        const unit = details[2] ? details[2].textContent.replace('Единица:', '').trim() : 'шт';
+                        const priceText = details[3] ? details[3].textContent : '';
+                        const priceMatch = priceText.match(/[\d\s,]+/);
+                        const price = priceMatch ? parseFloat(priceMatch[0].replace(/\s|,/g, '')) : 0;
+                        
                         const requestData = {
                             material: name,
-                            quantity: quantity + ' ' + (details[2] ? details[2].textContent.replace('Единица:', '').trim() : 'шт'),
+                            quantity: quantity + ' ' + unit,
                             bucketType: 'Не указан',
                             customer: 'Внутренний заказ',
-                            amount: details[3] ? parseFloat(details[3].textContent.replace(/[^\d]/g, '')) * parseFloat(quantity) : 0
+                            amount: price * parseFloat(quantity)
                         };
                         
                         const result = addRequest(requestData);
