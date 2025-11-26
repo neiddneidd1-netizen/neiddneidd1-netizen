@@ -296,26 +296,40 @@
         function showEmployeeForm(employee = null) {
             const isEdit = !!employee;
             const content = `
-                <form id="employeeForm" style="display: flex; flex-direction: column; gap: 15px;">
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Имя:</label>
-                    <input type="text" id="emp-firstName" value="${employee ? employee.firstName : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Фамилия:</label>
-                    <input type="text" id="emp-lastName" value="${employee ? employee.lastName : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Отчество:</label>
-                    <input type="text" id="emp-middleName" value="${employee ? employee.middleName : ''}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Должность:</label>
-                    <input type="text" id="emp-position" value="${employee ? employee.position : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Отдел:</label>
-                    <input type="text" id="emp-department" value="${employee ? employee.department : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
-                    <input type="email" id="emp-email" value="${employee ? employee.email : ''}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
-                    <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Роль:</label>
-                    <select id="emp-role" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                        <option value="employee" ${employee && employee.role === 'employee' ? 'selected' : ''}>Сотрудник</option>
-                        <option value="manager" ${employee && employee.role === 'manager' ? 'selected' : ''}>Руководитель</option>
-                        <option value="procurement" ${employee && employee.role === 'procurement' ? 'selected' : ''}>Менеджер по закупкам</option>
-                        <option value="admin" ${employee && employee.role === 'admin' ? 'selected' : ''}>Администратор</option>
-                    </select></div>
+                <form id="employeeForm">
+                    <div class="form-group">
+                        <label for="emp-firstName">Имя:</label>
+                        <input type="text" id="emp-firstName" value="${employee ? employee.firstName : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-lastName">Фамилия:</label>
+                        <input type="text" id="emp-lastName" value="${employee ? employee.lastName : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-middleName">Отчество:</label>
+                        <input type="text" id="emp-middleName" value="${employee ? employee.middleName : ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-position">Должность:</label>
+                        <input type="text" id="emp-position" value="${employee ? employee.position : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-department">Отдел:</label>
+                        <input type="text" id="emp-department" value="${employee ? employee.department : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-email">Email:</label>
+                        <input type="email" id="emp-email" value="${employee ? employee.email : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-role">Роль:</label>
+                        <select id="emp-role" required>
+                            <option value="employee" ${employee && employee.role === 'employee' ? 'selected' : ''}>Сотрудник</option>
+                            <option value="manager" ${employee && employee.role === 'manager' ? 'selected' : ''}>Руководитель</option>
+                            <option value="procurement" ${employee && employee.role === 'procurement' ? 'selected' : ''}>Менеджер по закупкам</option>
+                            <option value="admin" ${employee && employee.role === 'admin' ? 'selected' : ''}>Администратор</option>
+                        </select>
+                    </div>
                 </form>
             `;
             
