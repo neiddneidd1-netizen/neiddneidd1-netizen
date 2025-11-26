@@ -22,11 +22,11 @@ body {
 }
 
 header {
-    background: #2196F3;
+    background: #1976d2;
     color: white;
     padding: 35px 30px;
     text-align: center;
-    border-bottom: 2px solid #1976d2;
+    border-bottom: 2px solid #1565c0;
 }
 
 .logo {
@@ -184,7 +184,7 @@ body.login-page {
 }
 
 .left-panel {
-    background: #1565c0;
+    background: #1976d2;
     color: white;
     padding: 60px 40px;
     display: flex;
