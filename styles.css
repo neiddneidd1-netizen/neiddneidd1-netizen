@@ -1166,6 +1166,36 @@ body.login-page {
 }
 
 /* ========== СТИЛИ ДЛЯ СТРАНИЦЫ ЗАЯВОК ========== */
+/* Фильтры для заявок */
+.filters {
+    background: #bbdefb;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.filter-group select, 
+.filter-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
 .requests-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1269,6 +1299,10 @@ body.login-page {
 }
 
 @media (max-width: 768px) {
+    .filters {
+        grid-template-columns: 1fr;
+    }
+    
     .charts {
         grid-template-columns: 1fr;
     }
@@ -1279,6 +1313,37 @@ body.login-page {
 }
 
 /* ========== СТИЛИ ДЛЯ СТРАНИЦЫ МАТЕРИАЛОВ ========== */
+/* Поиск на странице материалов */
+.search-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.search-bar button {
+    padding: 12px 30px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+.search-bar button:hover {
+    background: #2980b9;
+}
+
 .materials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1378,37 +1443,6 @@ body.login-page {
 .category-btn.active {
     background: #1976d2;
     color: white;
-}
-
-/* Стили для поиска на странице материалов */
-.search-bar {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    align-items: center;
-}
-
-.search-bar input {
-    flex: 1;
-    padding: 12px 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1em;
-}
-
-.search-bar button {
-    padding: 12px 30px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.3s;
-}
-
-.search-bar button:hover {
-    background: #2980b9;
 }
 
 @media (max-width: 768px) {
