@@ -431,6 +431,17 @@ body.login-page {
     text-decoration: underline;
 }
 
+/* Стили для форм в модальных окнах */
+#employeeForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#employeeForm .form-group {
+    margin-bottom: 0;
+}
+
 .checkbox-label {
     margin: 0;
     font-weight: normal;
@@ -1367,5 +1378,16 @@ body.login-page {
 
 .register-links a:hover {
     text-decoration: underline;
+}
+
+/* Стили для форм в модальных окнах */
+#employeeForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#employeeForm .form-group {
+    margin-bottom: 0;
 }
 
