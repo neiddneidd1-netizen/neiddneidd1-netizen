@@ -431,6 +431,47 @@ body.login-page {
     text-decoration: underline;
 }
 
+/* Стили для форм в модальных окнах заявок и материалов */
+#requestForm,
+#materialForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#requestForm .form-group,
+#materialForm .form-group {
+    margin-bottom: 0;
+}
+
+#materialForm textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    min-height: 60px;
+    font-family: 'Arial', sans-serif;
+    resize: vertical;
+}
+
+#materialForm textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Стили для кнопки удаления */
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    opacity: 0.9;
+}
+
 /* Стили для форм в модальных окнах */
 #employeeForm {
     display: flex;
@@ -1418,6 +1459,47 @@ body.login-page {
 
 .register-links a:hover {
     text-decoration: underline;
+}
+
+/* Стили для форм в модальных окнах заявок и материалов */
+#requestForm,
+#materialForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#requestForm .form-group,
+#materialForm .form-group {
+    margin-bottom: 0;
+}
+
+#materialForm textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    min-height: 60px;
+    font-family: 'Arial', sans-serif;
+    resize: vertical;
+}
+
+#materialForm textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Стили для кнопки удаления */
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    opacity: 0.9;
 }
 
 /* Стили для форм в модальных окнах */
