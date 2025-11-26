@@ -789,3 +789,321 @@ body.login-page {
     }
 }
 
+/* ========== СТИЛИ ДЛЯ СТРАНИЦЫ ОТЧЕТОВ ========== */
+.filters {
+    background: #bbdefb;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.filter-group select, .filter-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.report-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.report-card {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+}
+
+.report-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.report-card h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.report-card p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.stats-grid .stat-card {
+    background: #e3f2fd;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-top: 4px solid #3498db;
+}
+
+.stats-grid .stat-number {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #3498db;
+    margin-bottom: 5px;
+}
+
+.stats-grid .stat-label {
+    color: #7f8c8d;
+    font-size: 0.95em;
+}
+
+.charts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.chart {
+    background: #e3f2fd;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.chart h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.chart-placeholder {
+    background: #bbdefb;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #7f8c8d;
+    font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+    .filters {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .report-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== СТИЛИ ДЛЯ СТРАНИЦЫ СОТРУДНИКОВ ========== */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.controls .search-bar {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+}
+
+.controls .search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    font-size: 1em;
+}
+
+.controls .search-bar button {
+    padding: 12px 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.employees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.employee-card {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.employee-card:hover {
+    transform: translateY(-5px);
+}
+
+.employee-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.employee-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.employee-info h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.employee-position {
+    color: #7f8c8d;
+    font-size: 1em;
+}
+
+.employee-details {
+    margin-bottom: 20px;
+}
+
+.detail-row {
+    display: flex;
+    margin: 8px 0;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #2c3e50;
+    min-width: 120px;
+}
+
+.detail-value {
+    color: #555;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.role-employee { background: #95a5a6; color: white; }
+.role-manager { background: #e74c3c; color: white; }
+.role-procurement { background: #f39c12; color: white; }
+.role-admin { background: #9b59b6; color: white; }
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.status-active { background: #27ae60; color: white; }
+.status-inactive { background: #95a5a6; color: white; }
+
+.employee-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.departments-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.department-stat {
+    background: #e3f2fd;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.department-name {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.employee-count {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #3498db;
+}
+
+@media (max-width: 768px) {
+    .employees-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .controls .search-bar {
+        max-width: 100%;
+    }
+}
+
