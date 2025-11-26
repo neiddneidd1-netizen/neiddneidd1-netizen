@@ -25,7 +25,7 @@ function addProfileLink() {
         // Если пользователь авторизован, заменяем "Вход" на "Личный кабинет"
         if (loginLink && !profileLink) {
             loginLink.href = 'profile.html';
-            loginLink.innerHTML = '👤 Личный кабинет';
+            loginLink.innerHTML = 'Личный кабинет';
         }
     } else {
         // Если не авторизован, возвращаем "Вход"
@@ -666,7 +666,7 @@ function displayCurrentUser() {
         `;
         
         userInfo.innerHTML = `
-            <span style="font-size: 1.2em;">👤</span>
+            <span style="font-size: 1.2em;"></span>
             <div style="display: flex; flex-direction: column;">
                 <span style="font-weight: bold; color: white;">${currentUser.firstName} ${currentUser.lastName}</span>
                 <span style="font-size: 0.85em; color: ${roleColor};">${roleText}</span>
@@ -816,14 +816,16 @@ function createModal(title, content, buttons = []) {
         width: 90%;
         max-height: 90vh;
         overflow-y: auto;
+        overflow-x: hidden;
         box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        box-sizing: border-box;
     `;
     
     modal.innerHTML = `
         <h2 style="margin-bottom: 20px; color: #2c3e50;">${title}</h2>
         <div id="modal-content">${content}</div>
-        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
-            ${buttons.map(btn => `<button class="btn ${btn.class || 'btn-primary'}" onclick="${btn.onclick || 'closeModal()'}">${btn.text}</button>`).join('')}
+        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+            ${buttons.map(btn => `<button class="btn ${btn.class || 'btn-primary'}" onclick="${btn.onclick || 'closeModal()'}" style="min-width: 100px; white-space: nowrap;">${btn.text}</button>`).join('')}
         </div>
     `;
     
@@ -1684,15 +1686,15 @@ function loadProfileOverview() {
     
     // Статистика для всех ролей
     statsHTML += `
-        <div class="stat-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+        <div class="stat-card" style="background: #34495e;">
             <div class="number">${stats.myRequests}</div>
             <div class="label">Мои заявки</div>
         </div>
-        <div class="stat-card" style="background: linear-gradient(135deg, #27ae60, #229954);">
+        <div class="stat-card" style="background: #34495e;">
             <div class="number">${stats.approvedRequests}</div>
             <div class="label">Утверждено</div>
         </div>
-        <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+        <div class="stat-card" style="background: #34495e;">
             <div class="number">${stats.pendingRequests}</div>
             <div class="label">На согласовании</div>
         </div>
@@ -1701,7 +1703,7 @@ function loadProfileOverview() {
     // Дополнительная статистика для менеджеров, закупок и админов
     if (user.role === 'admin' || user.role === 'manager' || user.role === 'procurement') {
         statsHTML += `
-            <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+            <div class="stat-card" style="background: #34495e;">
                 <div class="number">${allStats.totalRequests}</div>
                 <div class="label">Всего заявок</div>
             </div>
@@ -1711,11 +1713,11 @@ function loadProfileOverview() {
     // Статистика для администратора
     if (user.role === 'admin') {
         statsHTML += `
-            <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+            <div class="stat-card" style="background: #34495e;">
                 <div class="number">${(window.appData.users || []).length}</div>
                 <div class="label">Пользователей</div>
             </div>
-            <div class="stat-card" style="background: linear-gradient(135deg, #16a085, #138d75);">
+            <div class="stat-card" style="background: #34495e;">
                 <div class="number">${(window.appData.materials || []).length}</div>
                 <div class="label">Материалов</div>
             </div>
@@ -1841,31 +1843,31 @@ function loadAdminPanel() {
             <p>Добавление, редактирование и удаление сотрудников</p>
         </div>
         <div class="admin-card" onclick="window.location.href='materials.html'">
-            <h3>🛒 Управление материалами</h3>
+            <h3>Управление материалами</h3>
             <p>Полное управление каталогом материалов</p>
         </div>
         <div class="admin-card" onclick="window.location.href='requests.html'">
-            <h3>📋 Управление заявками</h3>
+            <h3>Управление заявками</h3>
             <p>Просмотр и управление всеми заявками</p>
         </div>
         <div class="admin-card" onclick="window.location.href='reports.html'">
-            <h3>📊 Отчеты и аналитика</h3>
+            <h3>Отчеты и аналитика</h3>
             <p>Формирование отчетов и анализ данных</p>
         </div>
         <div class="admin-card" onclick="showSystemStats()">
-            <h3>📈 Статистика системы</h3>
+            <h3>Статистика системы</h3>
             <p>Общая статистика и метрики системы</p>
         </div>
         <div class="admin-card" onclick="showDatabaseInfo()">
-            <h3>💾 База данных</h3>
+            <h3>База данных</h3>
             <p>Информация о базе данных и экспорт</p>
         </div>
         <div class="admin-card" onclick="showUsersManagement()">
-            <h3>🔐 Управление пользователями</h3>
+            <h3>Управление пользователями</h3>
             <p>Управление учетными записями и правами доступа</p>
         </div>
         <div class="admin-card" onclick="showSystemSettings()">
-            <h3>⚙️ Настройки системы</h3>
+            <h3>Настройки системы</h3>
             <p>Системные настройки и конфигурация</p>
         </div>
     `;
@@ -1880,19 +1882,19 @@ function loadManagerPanel() {
     
     const managerHTML = `
         <div class="admin-card" onclick="window.location.href='requests.html'">
-            <h3>📋 Управление заявками</h3>
+            <h3>Управление заявками</h3>
             <p>Утверждение и отклонение заявок на согласовании</p>
         </div>
         <div class="admin-card" onclick="window.location.href='reports.html'">
-            <h3>📊 Отчеты и аналитика</h3>
+            <h3>Отчеты и аналитика</h3>
             <p>Формирование отчетов по заявкам и деятельности</p>
         </div>
         <div class="admin-card" onclick="window.location.href='employees.html'">
-            <h3>👥 Просмотр сотрудников</h3>
+            <h3>Просмотр сотрудников</h3>
             <p>Просмотр списка сотрудников и их активности</p>
         </div>
         <div class="admin-card" onclick="showPendingRequests()">
-            <h3>⏳ Заявки на согласовании</h3>
+            <h3>Заявки на согласовании</h3>
             <p>Просмотр заявок, ожидающих вашего решения</p>
         </div>
     `;
@@ -1907,19 +1909,19 @@ function loadProcurementPanel() {
     
     const procurementHTML = `
         <div class="admin-card" onclick="window.location.href='materials.html'">
-            <h3>🛒 Управление материалами</h3>
+            <h3>Управление материалами</h3>
             <p>Добавление и редактирование материалов</p>
         </div>
         <div class="admin-card" onclick="window.location.href='requests.html'">
-            <h3>📋 Утвержденные заявки</h3>
+            <h3>Утвержденные заявки</h3>
             <p>Обработка и завершение утвержденных заявок</p>
         </div>
         <div class="admin-card" onclick="window.location.href='reports.html'">
-            <h3>📊 Отчеты по закупкам</h3>
+            <h3>Отчеты по закупкам</h3>
             <p>Формирование отчетов по закупочной деятельности</p>
         </div>
         <div class="admin-card" onclick="showApprovedRequests()">
-            <h3>✅ Заявки к обработке</h3>
+            <h3>Заявки к обработке</h3>
             <p>Просмотр утвержденных заявок, требующих обработки</p>
         </div>
     `;
@@ -1944,9 +1946,9 @@ function showPendingRequests() {
             <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
                 <strong>${request.id}</strong> - ${request.material}<br>
                 <span style="color: #666; font-size: 0.9em;">${request.customer} • ${request.createdDate}</span>
-                <div style="margin-top: 10px;">
-                    <button class="btn btn-success btn-sm" onclick="approveFromModal('${request.id}')">Утвердить</button>
-                    <button class="btn btn-warning btn-sm" onclick="rejectFromModal('${request.id}')">Отклонить</button>
+                <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-success btn-sm" onclick="approveFromModal('${request.id}')" style="min-width: 100px; white-space: nowrap;">Утвердить</button>
+                    <button class="btn btn-warning btn-sm" onclick="rejectFromModal('${request.id}')" style="min-width: 100px; white-space: nowrap;">Отклонить</button>
                 </div>
             </div>
         `;
@@ -1975,8 +1977,8 @@ function showApprovedRequests() {
             <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
                 <strong>${request.id}</strong> - ${request.material}<br>
                 <span style="color: #666; font-size: 0.9em;">${request.customer} • ${request.createdDate}</span>
-                <div style="margin-top: 10px;">
-                    <button class="btn btn-success btn-sm" onclick="completeFromModal('${request.id}')">Завершить</button>
+                <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-success btn-sm" onclick="completeFromModal('${request.id}')" style="min-width: 100px; white-space: nowrap;">Завершить</button>
                 </div>
             </div>
         `;
@@ -2437,7 +2439,7 @@ function showRoleInfo() {
     roleCard.className = 'card role-info-card';
     
     roleCard.innerHTML = `
-        <h3>👤 Ваша роль: ${roleInfo.title}</h3>
+        <h3>Ваша роль: ${roleInfo.title}</h3>
         <p>${roleInfo.description}</p>
         <div class="role-permissions-grid">
             ${roleInfo.permissions.map(p => `<div class="role-permission-item">${p}</div>`).join('')}
