@@ -192,7 +192,10 @@
 
         function updateMaterialsList() {
             const grid = document.getElementById('materialsGrid') || document.querySelector('.materials-grid');
-            if (!grid) return;
+            if (!grid) {
+                console.error('Сетка материалов не найдена');
+                return;
+            }
             
             // Проверяем, есть ли данные
             if (!window.appData || !window.appData.materials || window.appData.materials.length === 0) {
@@ -207,17 +210,29 @@
             staticCards.forEach(card => card.style.display = 'none');
             
             // Получаем отфильтрованные материалы
-            const materials = searchMaterials(currentSearch || '', currentCategory || 'Все материалы');
+            let materials = [];
+            try {
+                materials = searchMaterials(currentSearch || '', currentCategory || 'Все материалы');
+            } catch (e) {
+                console.error('Ошибка при поиске материалов:', e);
+                materials = window.appData.materials || [];
+            }
             
-            // Удаляем старые динамические карточки (не статичные)
+            // Удаляем старые динамические карточки и сообщения
             const dynamicCards = grid.querySelectorAll('.material-card:not([data-static="true"])');
             dynamicCards.forEach(card => card.remove());
+            const noResultsMsg = grid.querySelector('div[style*="grid-column"]');
+            if (noResultsMsg) noResultsMsg.remove();
             
             // Добавляем новые карточки
             if (materials.length > 0) {
                 materials.forEach(material => {
-                    const card = createMaterialCard(material);
-                    grid.appendChild(card);
+                    try {
+                        const card = createMaterialCard(material);
+                        grid.appendChild(card);
+                    } catch (e) {
+                        console.error('Ошибка при создании карточки материала:', e, material);
+                    }
                 });
             } else {
                 // Если ничего не найдено, показываем сообщение
