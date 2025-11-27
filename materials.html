@@ -45,8 +45,9 @@
                 <button class="category-btn">Расходники</button>
             </div>
 
-            <div class="materials-grid">
-                <div class="material-card">
+            <div class="materials-grid" id="materialsGrid">
+                <!-- Статичные карточки будут заменены динамическими при загрузке данных -->
+                <div class="material-card" data-static="true">
                     <div class="material-header">
                         <div>
                             <div class="material-name">Электроды Hardex 600</div>
@@ -68,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="material-card">
+                <div class="material-card" data-static="true">
                     <div class="material-header">
                         <div>
                             <div class="material-name">Сталь HARDOX 450</div>
@@ -90,7 +91,7 @@
                     </div>
                 </div>
 
-                <div class="material-card">
+                <div class="material-card" data-static="true">
                     <div class="material-header">
                         <div>
                             <div class="material-name">Проволока ПП-АН170</div>
@@ -133,16 +134,20 @@
                 return;
             }
             
+            // Инициализируем обработчики сразу
+            initMaterialsPageHandlers();
+            
+            // Загружаем данные и обновляем список
             if (!window.appData) {
-                loadData().then(() => initMaterialsPage());
+                loadData().then(() => {
+                    updateMaterialsList();
+                });
             } else {
-                initMaterialsPage();
+                updateMaterialsList();
             }
         });
 
-        function initMaterialsPage() {
-            updateMaterialsList();
-            
+        function initMaterialsPageHandlers() {
             // Категории
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -153,27 +158,32 @@
                 });
             });
 
-            // Поиск - исправленный селектор
+            // Поиск
             const searchInput = document.getElementById('materialSearchInput');
             const searchBtn = document.getElementById('searchBtn');
             if (searchInput && searchBtn) {
-                searchBtn.addEventListener('click', () => {
-                    currentSearch = searchInput.value;
+                searchBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentSearch = searchInput.value.trim();
                     updateMaterialsList();
                 });
                 searchInput.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
-                        currentSearch = searchInput.value;
+                        e.preventDefault();
+                        currentSearch = searchInput.value.trim();
                         updateMaterialsList();
                     }
                 });
             }
 
-            // Кнопка добавления - исправленный селектор
+            // Кнопка добавления
             const addBtn = document.getElementById('addMaterialBtn');
             if (addBtn) {
                 if (hasPermission('canAddMaterial')) {
-                    addBtn.addEventListener('click', () => showMaterialForm());
+                    addBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showMaterialForm();
+                    });
                 } else {
                     addBtn.style.display = 'none';
                 }
@@ -181,14 +191,41 @@
         }
 
         function updateMaterialsList() {
-            const materials = searchMaterials(currentSearch, currentCategory);
-            const grid = document.querySelector('.materials-grid');
-            grid.innerHTML = '';
+            const grid = document.getElementById('materialsGrid') || document.querySelector('.materials-grid');
+            if (!grid) return;
             
-            materials.forEach(material => {
-                const card = createMaterialCard(material);
-                grid.appendChild(card);
-            });
+            // Проверяем, есть ли данные
+            if (!window.appData || !window.appData.materials || window.appData.materials.length === 0) {
+                // Если данных нет, оставляем статичные карточки видимыми
+                const staticCards = grid.querySelectorAll('[data-static="true"]');
+                staticCards.forEach(card => card.style.display = '');
+                return;
+            }
+            
+            // Скрываем статичные карточки
+            const staticCards = grid.querySelectorAll('[data-static="true"]');
+            staticCards.forEach(card => card.style.display = 'none');
+            
+            // Получаем отфильтрованные материалы
+            const materials = searchMaterials(currentSearch || '', currentCategory || 'Все материалы');
+            
+            // Удаляем старые динамические карточки (не статичные)
+            const dynamicCards = grid.querySelectorAll('.material-card:not([data-static="true"])');
+            dynamicCards.forEach(card => card.remove());
+            
+            // Добавляем новые карточки
+            if (materials.length > 0) {
+                materials.forEach(material => {
+                    const card = createMaterialCard(material);
+                    grid.appendChild(card);
+                });
+            } else {
+                // Если ничего не найдено, показываем сообщение
+                const noResults = document.createElement('div');
+                noResults.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 40px; color: #666; font-size: 1.2em;';
+                noResults.textContent = 'Материалы не найдены';
+                grid.appendChild(noResults);
+            }
         }
 
         function createMaterialCard(material) {
