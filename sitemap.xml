@@ -6,7 +6,7 @@
     
     <!-- Главная страница -->
     <url>
-        <loc>https://ваш-домен.ru/index.html</loc>
+        <loc>https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/index.html</loc>
         <lastmod>2024-11-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
@@ -14,7 +14,7 @@
     
     <!-- Страница заявок -->
     <url>
-        <loc>https://ваш-домен.ru/requests.html</loc>
+        <loc>https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/requests.html</loc>
         <lastmod>2024-11-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
@@ -22,7 +22,7 @@
     
     <!-- Страница материалов -->
     <url>
-        <loc>https://ваш-домен.ru/materials.html</loc>
+        <loc>https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/materials.html</loc>
         <lastmod>2024-11-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -30,7 +30,7 @@
     
     <!-- Страница отчетов -->
     <url>
-        <loc>https://ваш-домен.ru/reports.html</loc>
+        <loc>https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/reports.html</loc>
         <lastmod>2024-11-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
@@ -38,7 +38,7 @@
     
     <!-- Страница сотрудников -->
     <url>
-        <loc>https://ваш-домен.ru/employees.html</loc>
+        <loc>https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/employees.html</loc>
         <lastmod>2024-11-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>

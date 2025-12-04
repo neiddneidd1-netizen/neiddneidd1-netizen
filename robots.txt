@@ -39,6 +39,6 @@ Disallow: /*.json$
 Disallow: /database.json
 
 # Sitemap
-Sitemap: https://ваш-домен.ru/sitemap.xml
+Sitemap: https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/sitemap.xml
 
 
