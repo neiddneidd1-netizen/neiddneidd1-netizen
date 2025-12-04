@@ -5,38 +5,52 @@ Allow: /
 Disallow: /*?404
 Disallow: /*404
 Disallow: /404.html
+Disallow: /*not-found*
+Disallow: /*error-404*
+Disallow: /*page-not-found*
 
 # Запрет индексирования дубликатов (URL с параметрами)
 Disallow: /*?*
-Disallow: /*?print=
-Disallow: /*?print=*
+Disallow: /*?id=*
+Disallow: /*?page=*
+Disallow: /*?ref=*
+Disallow: /*?utm_*
+Disallow: /*?fbclid=*
 
 # Запрет индексирования версий для печати
 Disallow: /*print
 Disallow: /*print.html
 Disallow: /*/print/
+Disallow: /*?print=*
 Disallow: /*?print=1
 Disallow: /*?print=true
+Disallow: /*print-preview*
+Disallow: /*print-version*
 
 # Запрет индексирования вспомогательных страниц
 # Поиск
 Disallow: /*search*
-Disallow: /*?search=
-Disallow: /*?q=
-Disallow: /*?query=
+Disallow: /*?search=*
+Disallow: /*?q=*
+Disallow: /*?query=*
+Disallow: /*?s=*
 
 # Авторизация и регистрация
 Disallow: /login.html
 Disallow: /register.html
+Disallow: /*login*
+Disallow: /*register*
+Disallow: /*signin*
+Disallow: /*signup*
+Disallow: /*auth*
 
 # Личный кабинет и административная панель
 Disallow: /profile.html
 Disallow: /*admin*
 Disallow: /*/admin/
-
-# Дополнительные технические страницы
-Disallow: /*.json$
-Disallow: /database.json
+Disallow: /*dashboard*
+Disallow: /*panel*
+Disallow: /*management*
 
 # Sitemap
 Sitemap: https://neiddneidd1-netizen.github.io/neiddneidd1-netizen/sitemap.xml
