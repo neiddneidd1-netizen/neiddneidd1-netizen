@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# Запрет индексирования страниц с ошибкой 404
+Disallow: /*?404
+Disallow: /*404
+Disallow: /404.html
+
+# Запрет индексирования дубликатов (URL с параметрами)
+Disallow: /*?*
+Disallow: /*?print=
+Disallow: /*?print=*
+
+# Запрет индексирования версий для печати
+Disallow: /*print
+Disallow: /*print.html
+Disallow: /*/print/
+Disallow: /*?print=1
+Disallow: /*?print=true
+
+# Запрет индексирования вспомогательных страниц
+# Поиск
+Disallow: /*search*
+Disallow: /*?search=
+Disallow: /*?q=
+Disallow: /*?query=
+
+# Авторизация и регистрация
+Disallow: /login.html
+Disallow: /register.html
+
+# Личный кабинет и административная панель
+Disallow: /profile.html
+Disallow: /*admin*
+Disallow: /*/admin/
+
+# Дополнительные технические страницы
+Disallow: /*.json$
+Disallow: /database.json
+
+# Sitemap
+Sitemap: https://ваш-домен.ru/sitemap.xml
+
+

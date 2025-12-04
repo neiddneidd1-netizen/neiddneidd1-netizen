@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Система управления заявками на материалы для ремонта ковшей</div>
+        </header>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="requests.html">Заявки</a></li>
+                <li><a href="materials.html">Материалы</a></li>
+                <li><a href="reports.html">Отчеты</a></li>
+                <li><a href="employees.html">Сотрудники</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <div class="card">
+                <h3>Создать новую заявку</h3>
+                <p>Подайте заявку на материалы для ремонта ковшей. Укажите тип ковша, необходимые материалы и сроки поставки.</p>
+                <div class="quick-actions">
+                    <button class="btn">Новая заявка</button>
+                    <button class="btn">Черновики</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Мои заявки</h3>
+                <p>Отслеживайте статус ваших заявок, просматривайте историю изменений и получайте уведомления.</p>
+                <div class="quick-actions">
+                    <button class="btn">Текущие заявки</button>
+                    <button class="btn">История</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Каталог материалов</h3>
+                <p>Просматривайте доступные материалы: электроды, сталь Hardox, проволоку, комплектующие и другие позиции.</p>
+                <div class="quick-actions">
+                    <button class="btn">Каталог</button>
+                    <button class="btn">Поиск</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Управление доступом</h3>
+                <p>Настройка прав доступа для сотрудников, руководителей и менеджеров закупок.</p>
+                <div class="quick-actions">
+                    <button class="btn">Пользователи</button>
+                    <button class="btn">Роли</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h3>Статистика за текущий месяц</h3>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Новых заявок</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Утверждено</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">В обработке</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Система управления заявками "Ковшей-Сервис". Все права защищены.</p>
+            <p class="footer-support">Техническая поддержка: support@kovshey-service.ru | +7 (495) 123-45-67</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Инициализация главной страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            initHomePageHandler();
+        });
+    </script>
+</body>
+</html>

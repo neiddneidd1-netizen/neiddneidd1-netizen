@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Материалы - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Система управления заявками на материалы для ремонта ковшей</div>
+        </header>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="requests.html">Заявки</a></li>
+                <li><a href="materials.html" class="active">Материалы</a></li>
+                <li><a href="reports.html">Отчеты</a></li>
+                <li><a href="employees.html">Сотрудники</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-header">
+            <h1>Каталог материалов</h1>
+            <p>Управление материалами для ремонта ковшей</p>
+        </div>
+
+        <div class="content">
+            <div class="search-bar">
+                <input type="text" id="materialSearchInput" placeholder="Поиск материалов...">
+                <button id="searchBtn" class="btn btn-primary">Найти</button>
+                <button id="addMaterialBtn" class="btn btn-success">+ Добавить материал</button>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active">Все материалы</button>
+                <button class="category-btn">Электроды</button>
+                <button class="category-btn">Сталь</button>
+                <button class="category-btn">Проволока</button>
+                <button class="category-btn">Комплектующие</button>
+                <button class="category-btn">Расходники</button>
+            </div>
+
+            <div class="materials-grid" id="materialsGrid">
+                <!-- Статичные карточки будут заменены динамическими при загрузке данных -->
+                <div class="material-card" data-static="true">
+                    <div class="material-header">
+                        <div>
+                            <div class="material-name">Электроды Hardex 600</div>
+                            <div class="material-category">Электроды</div>
+                        </div>
+                    </div>
+                    <div class="material-details">
+                        <p><strong>Описание:</strong> Для наплавки с высокой износостойкостью</p>
+                        <p><strong>Характеристики:</strong> Диаметр 4.0 мм, время гелеобразования 45 мин</p>
+                        <p><strong>Единица:</strong> кг</p>
+                        <p><strong>Цена:</strong> 850 ₽/кг</p>
+                    </div>
+                    <div class="material-stock">
+                        <div class="stock-info stock-available">✓ В наличии: 125 кг</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-1', event)">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-1', event)">Заказать</button>
+                    </div>
+                </div>
+
+                <div class="material-card" data-static="true">
+                    <div class="material-header">
+                        <div>
+                            <div class="material-name">Сталь HARDOX 450</div>
+                            <div class="material-category">Сталь</div>
+                        </div>
+                    </div>
+                    <div class="material-details">
+                        <p><strong>Описание:</strong> Износостойкая сталь для стенок ковша</p>
+                        <p><strong>Характеристики:</strong> Толщина 10 мм, твердость 450 HB</p>
+                        <p><strong>Единица:</strong> лист</p>
+                        <p><strong>Цена:</strong> 12,500 ₽/лист</p>
+                    </div>
+                    <div class="material-stock">
+                        <div class="stock-info stock-low">⚠ Мало: 3 листа</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-2', event)">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-2', event)">Заказать</button>
+                    </div>
+                </div>
+
+                <div class="material-card" data-static="true">
+                    <div class="material-header">
+                        <div>
+                            <div class="material-name">Проволока ПП-АН170</div>
+                            <div class="material-category">Проволока</div>
+                        </div>
+                    </div>
+                    <div class="material-details">
+                        <p><strong>Описание:</strong> Порошковая проволока для наплавки зубьев</p>
+                        <p><strong>Характеристики:</strong> Диаметр 2.8 мм, скорость наплавки 4.5 кг/ч</p>
+                        <p><strong>Единица:</strong> кг</p>
+                        <p><strong>Цена:</strong> 1,200 ₽/кг</p>
+                    </div>
+                    <div class="material-stock">
+                        <div class="stock-info stock-available">✓ В наличии: 85 кг</div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn btn-primary" onclick="editMaterialStatic('mat-3', event)">Изменить</button>
+                        <button class="btn btn-warning" onclick="orderMaterialStatic('mat-3', event)">Заказать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Система управления заявками "Ковшей-Сервис". Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        let currentCategory = 'Все материалы';
+        let currentSearch = '';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем авторизацию
+            const user = getCurrentUser();
+            if (!user) {
+                alert('Необходима авторизация для доступа к этой странице.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Инициализируем обработчики сразу
+            initMaterialsPageHandlers();
+            
+            // Загружаем данные и обновляем список
+            if (!window.appData) {
+                loadData().then(() => {
+                    updateMaterialsList();
+                });
+            } else {
+                updateMaterialsList();
+            }
+        });
+
+        function initMaterialsPageHandlers() {
+            // Категории
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.textContent;
+                    updateMaterialsList();
+                });
+            });
+
+            // Поиск
+            const searchInput = document.getElementById('materialSearchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            if (searchInput && searchBtn) {
+                searchBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentSearch = searchInput.value.trim();
+                    updateMaterialsList();
+                });
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        currentSearch = searchInput.value.trim();
+                        updateMaterialsList();
+                    }
+                });
+            }
+
+            // Кнопка добавления
+            const addBtn = document.getElementById('addMaterialBtn');
+            if (addBtn) {
+                if (hasPermission('canAddMaterial')) {
+                    addBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showMaterialForm();
+                    });
+                } else {
+                    addBtn.style.display = 'none';
+                }
+            }
+        }
+
+        function updateMaterialsList() {
+            const grid = document.getElementById('materialsGrid') || document.querySelector('.materials-grid');
+            if (!grid) {
+                console.error('Сетка материалов не найдена');
+                return;
+            }
+            
+            // Проверяем, есть ли данные
+            if (!window.appData || !window.appData.materials || window.appData.materials.length === 0) {
+                // Если данных нет, оставляем статичные карточки видимыми
+                const staticCards = grid.querySelectorAll('[data-static="true"]');
+                staticCards.forEach(card => card.style.display = '');
+                return;
+            }
+            
+            // Скрываем статичные карточки
+            const staticCards = grid.querySelectorAll('[data-static="true"]');
+            staticCards.forEach(card => card.style.display = 'none');
+            
+            // Получаем отфильтрованные материалы
+            let materials = [];
+            try {
+                materials = searchMaterials(currentSearch || '', currentCategory || 'Все материалы');
+            } catch (e) {
+                console.error('Ошибка при поиске материалов:', e);
+                materials = window.appData.materials || [];
+            }
+            
+            // Удаляем старые динамические карточки и сообщения
+            const dynamicCards = grid.querySelectorAll('.material-card:not([data-static="true"])');
+            dynamicCards.forEach(card => card.remove());
+            const noResultsMsg = grid.querySelector('div[style*="grid-column"]');
+            if (noResultsMsg) noResultsMsg.remove();
+            
+            // Добавляем новые карточки
+            if (materials.length > 0) {
+                materials.forEach(material => {
+                    try {
+                        const card = createMaterialCard(material);
+                        grid.appendChild(card);
+                    } catch (e) {
+                        console.error('Ошибка при создании карточки материала:', e, material);
+                    }
+                });
+            } else {
+                // Если ничего не найдено, показываем сообщение
+                const noResults = document.createElement('div');
+                noResults.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 40px; color: #666; font-size: 1.2em;';
+                noResults.textContent = 'Материалы не найдены';
+                grid.appendChild(noResults);
+            }
+        }
+
+        function createMaterialCard(material) {
+            const card = document.createElement('div');
+            card.className = 'material-card';
+            const stockClass = material.stock > 10 ? 'stock-available' : 'stock-low';
+            const stockText = material.stock > 10 ? `✓ В наличии: ${material.stock} ${material.unit}` : `⚠ Мало: ${material.stock} ${material.unit}`;
+            
+            card.innerHTML = `
+                <div class="material-header">
+                    <div>
+                        <div class="material-name">${material.name}</div>
+                        <div class="material-category">${material.category}</div>
+                    </div>
+                </div>
+                <div class="material-details">
+                    <p><strong>Описание:</strong> ${material.description}</p>
+                    <p><strong>Характеристики:</strong> ${material.specifications}</p>
+                    <p><strong>Единица:</strong> ${material.unit}</p>
+                    <p><strong>Цена:</strong> ${material.price.toLocaleString()} ₽/${material.unit}</p>
+                </div>
+                <div class="material-stock">
+                    <div class="stock-info ${stockClass}">${stockText}</div>
+                </div>
+                <div class="material-actions">
+                    ${hasPermission('canEditMaterial') ? `<button class="btn btn-primary" onclick="editMaterial('${material.id}')">Изменить</button>` : ''}
+                    ${hasPermission('canOrderMaterial') ? `<button class="btn btn-warning" onclick="orderMaterial('${material.id}')">Заказать</button>` : ''}
+                </div>
+            `;
+            return card;
+        }
+
+        function showMaterialForm(material = null) {
+            const isEdit = !!material;
+            const content = `
+                <form id="materialForm">
+                    <div class="form-group">
+                        <label for="mat-name">Название:</label>
+                        <input type="text" id="mat-name" value="${material ? material.name : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-category">Категория:</label>
+                        <select id="mat-category" required>
+                            <option value="">Выберите категорию</option>
+                            <option value="Электроды" ${material && material.category === 'Электроды' ? 'selected' : ''}>Электроды</option>
+                            <option value="Сталь" ${material && material.category === 'Сталь' ? 'selected' : ''}>Сталь</option>
+                            <option value="Проволока" ${material && material.category === 'Проволока' ? 'selected' : ''}>Проволока</option>
+                            <option value="Комплектующие" ${material && material.category === 'Комплектующие' ? 'selected' : ''}>Комплектующие</option>
+                            <option value="Расходники" ${material && material.category === 'Расходники' ? 'selected' : ''}>Расходники</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-description">Описание:</label>
+                        <textarea id="mat-description" required>${material ? material.description : ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-specs">Характеристики:</label>
+                        <input type="text" id="mat-specs" value="${material ? material.specifications : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-unit">Единица измерения:</label>
+                        <input type="text" id="mat-unit" value="${material ? material.unit : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-price">Цена (₽):</label>
+                        <input type="number" id="mat-price" value="${material ? material.price : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mat-stock">Остаток на складе:</label>
+                        <input type="number" id="mat-stock" value="${material ? material.stock : ''}" required>
+                    </div>
+                </form>
+            `;
+            
+            createModal(isEdit ? 'Редактировать материал' : 'Добавить материал', content, [
+                { text: 'Отмена', onclick: 'closeModal()', class: 'btn-secondary' },
+                { text: isEdit ? 'Сохранить' : 'Добавить', onclick: `saveMaterialForm('${material ? material.id : ''}')`, class: 'btn-success' }
+            ]);
+        }
+
+        function saveMaterialForm(materialId) {
+            if (materialId && !hasPermission('canEditMaterial')) {
+                alert('У вас нет прав для редактирования материалов.');
+                return;
+            }
+            if (!materialId && !hasPermission('canAddMaterial')) {
+                alert('У вас нет прав для добавления материалов.');
+                return;
+            }
+            
+            const materialData = {
+                name: document.getElementById('mat-name').value,
+                category: document.getElementById('mat-category').value,
+                description: document.getElementById('mat-description').value,
+                specifications: document.getElementById('mat-specs').value,
+                unit: document.getElementById('mat-unit').value,
+                price: parseFloat(document.getElementById('mat-price').value),
+                stock: parseFloat(document.getElementById('mat-stock').value)
+            };
+            
+            if (materialId) {
+                const result = updateMaterial(materialId, materialData);
+                if (result.success) {
+                    alert('Материал обновлен!');
+                    closeModal();
+                    updateMaterialsList();
+                }
+            } else {
+                const result = addMaterial(materialData);
+                if (result.success) {
+                    alert('Материал добавлен!');
+                    closeModal();
+                    updateMaterialsList();
+                }
+            }
+        }
+
+        function editMaterial(id) {
+            if (!hasPermission('canEditMaterial')) {
+                alert('У вас нет прав для редактирования материалов.');
+                return;
+            }
+            const material = window.appData.materials.find(m => m.id === id);
+            if (material) showMaterialForm(material);
+        }
+
+        // Функции для статичных карточек материалов
+        function editMaterialStatic(materialId, event) {
+            // Пытаемся найти материал в данных
+            const material = window.appData && window.appData.materials 
+                ? window.appData.materials.find(m => m.id === materialId) 
+                : null;
+            
+            if (material) {
+                editMaterial(materialId);
+            } else {
+                // Если материала нет в данных, создаем временный объект из статичной карточки
+                const button = event ? event.target : document.querySelector(`button[onclick*="editMaterialStatic('${materialId}')"]`);
+                const card = button ? button.closest('.material-card') : null;
+                
+                if (card) {
+                    const name = card.querySelector('.material-name').textContent;
+                    const category = card.querySelector('.material-category').textContent;
+                    const details = card.querySelectorAll('.material-details p');
+                    
+                    const tempMaterial = {
+                        id: materialId,
+                        name: name,
+                        category: category,
+                        description: details[0] ? details[0].textContent.replace('Описание:', '').trim() : '',
+                        specifications: details[1] ? details[1].textContent.replace('Характеристики:', '').trim() : '',
+                        unit: details[2] ? details[2].textContent.replace('Единица:', '').trim() : '',
+                        price: details[3] ? parseFloat(details[3].textContent.replace(/[^\d]/g, '')) : 0,
+                        stock: 0
+                    };
+                    
+                    if (hasPermission('canEditMaterial')) {
+                        showMaterialForm(tempMaterial);
+                    } else {
+                        alert('У вас нет прав для редактирования материалов.');
+                    }
+                }
+            }
+        }
+
+        function orderMaterialStatic(materialId, event) {
+            // Пытаемся найти материал в данных
+            if (window.appData && window.appData.materials) {
+                const material = window.appData.materials.find(m => m.id === materialId);
+                if (material) {
+                    if (typeof orderMaterial === 'function') {
+                        orderMaterial(materialId);
+                    } else {
+                        alert('Функция заказа материала недоступна. Пожалуйста, перезагрузите страницу.');
+                    }
+                    return;
+                }
+            }
+            
+            // Если материала нет в данных, создаем заявку из статичной карточки
+            const button = event ? event.target : document.querySelector(`button[onclick*="orderMaterialStatic('${materialId}')"]`);
+            const card = button ? button.closest('.material-card') : null;
+            
+            if (card) {
+                const name = card.querySelector('.material-name').textContent;
+                const details = card.querySelectorAll('.material-details p');
+                const quantity = prompt(`Введите количество для заказа материала "${name}":`);
+                
+                if (quantity && !isNaN(quantity) && parseFloat(quantity) > 0) {
+                    if (hasPermission('canOrderMaterial')) {
+                        // Создаем заявку
+                        const unit = details[2] ? details[2].textContent.replace('Единица:', '').trim() : 'шт';
+                        const priceText = details[3] ? details[3].textContent : '';
+                        const priceMatch = priceText.match(/[\d\s,]+/);
+                        const price = priceMatch ? parseFloat(priceMatch[0].replace(/\s|,/g, '')) : 0;
+                        
+                        const requestData = {
+                            material: name,
+                            quantity: quantity + ' ' + unit,
+                            bucketType: 'Не указан',
+                            customer: 'Внутренний заказ',
+                            amount: price * parseFloat(quantity)
+                        };
+                        
+                        const result = addRequest(requestData);
+                        if (result.success) {
+                            alert('Заявка на материал создана! Перейдите в раздел "Заявки" для просмотра.');
+                        } else {
+                            alert('Ошибка при создании заявки.');
+                        }
+                    } else {
+                        alert('У вас нет прав для заказа материалов.');
+                    }
+                }
+            }
+        }
+
+        // Функция orderMaterial находится в app.js
+        // При заказе материала автоматически создается заявка в разделе "Заявки"
+    </script>
+</body>
+</html>

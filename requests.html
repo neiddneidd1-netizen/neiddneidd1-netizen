@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявки - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Система управления заявками на материалы для ремонта ковшей</div>
+        </header>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="requests.html" class="active">Заявки</a></li>
+                <li><a href="materials.html">Материалы</a></li>
+                <li><a href="reports.html">Отчеты</a></li>
+                <li><a href="employees.html">Сотрудники</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-header">
+            <h1>Управление заявками</h1>
+            <p>Просмотр, создание и управление заявками на материалы</p>
+        </div>
+
+        <div class="content">
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Статус заявки</label>
+                    <select>
+                        <option>Все статусы</option>
+                        <option>Черновик</option>
+                        <option>На согласовании</option>
+                        <option>Утверждена</option>
+                        <option>В обработке</option>
+                        <option>Завершена</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Тип ковша</label>
+                    <select>
+                        <option>Все типы</option>
+                        <option>Экскаваторный</option>
+                        <option>Погрузочный</option>
+                        <option>Карьерный</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Дата с</label>
+                    <input type="date">
+                </div>
+                <div class="filter-group">
+                    <label>Дата по</label>
+                    <input type="date">
+                </div>
+            </div>
+
+            <div class="requests-grid">
+                <div class="request-card">
+                    <div class="request-header">
+                        <div class="request-id">#З-2024-001</div>
+                        <div class="request-status status-approved">Утверждена</div>
+                    </div>
+                    <div class="request-details">
+                        <p><strong>Материал:</strong> Электроды Hardex 600</p>
+                        <p><strong>Количество:</strong> 25 кг</p>
+                        <p><strong>Тип ковша:</strong> Экскаваторный 1.8м³</p>
+                        <p><strong>Заказчик:</strong> ООО "ГранитСтрой"</p>
+                        <p><strong>Создана:</strong> 10.01.2024</p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-primary">Просмотр</button>
+                        <button class="btn btn-success">Принять</button>
+                    </div>
+                </div>
+
+                <div class="request-card">
+                    <div class="request-header">
+                        <div class="request-id">#З-2024-002</div>
+                        <div class="request-status status-pending">На согласовании</div>
+                    </div>
+                    <div class="request-details">
+                        <p><strong>Материал:</strong> Сталь Hardox 450</p>
+                        <p><strong>Количество:</strong> 3 листа</p>
+                        <p><strong>Тип ковша:</strong> Погрузочный 5.5м³</p>
+                        <p><strong>Заказчик:</strong> ЗАО "КарьерСевер"</p>
+                        <p><strong>Создана:</strong> 12.01.2024</p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-primary">Просмотр</button>
+                        <button class="btn btn-warning">Согласовать</button>
+                    </div>
+                </div>
+
+                <div class="request-card">
+                    <div class="request-header">
+                        <div class="request-id">#З-2024-003</div>
+                        <div class="request-status status-draft">Черновик</div>
+                    </div>
+                    <div class="request-details">
+                        <p><strong>Материал:</strong> Проволока ПП-АН170</p>
+                        <p><strong>Количество:</strong> 15 кг</p>
+                        <p><strong>Тип ковша:</strong> Карьерный 8м³</p>
+                        <p><strong>Заказчик:</strong> ПАО "Рудник"</p>
+                        <p><strong>Создана:</strong> 14.01.2024</p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-primary">Редактировать</button>
+                        <button class="btn btn-success">Отправить</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts">
+                <div class="chart-container">
+                    <h3>Статистика заявок по статусам</h3>
+                    <div class="chart-placeholder">
+                        График распределения заявок по статусам
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Динамика заявок по месяцам</h3>
+                    <div class="chart-placeholder">
+                        График количества заявок по месяцам
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Система управления заявками "Ковшей-Сервис". Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Инициализация страницы заявок
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.appData) {
+                loadData().then(() => {
+                    initRequestsPage();
+                });
+            } else {
+                initRequestsPage();
+            }
+        });
+
+        function initRequestsPage() {
+            // Проверяем авторизацию
+            const user = getCurrentUser();
+            if (!user) {
+                alert('Необходима авторизация для доступа к этой странице.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Обновляем список заявок
+            updateRequestsList();
+            
+            // Обработчики фильтров
+            const filterSelects = document.querySelectorAll('.filters select, .filters input');
+            filterSelects.forEach(filter => {
+                filter.addEventListener('change', applyFilters);
+            });
+            
+            // Добавляем кнопку создания заявки
+            addCreateRequestButton();
+        }
+
+        function updateRequestsList() {
+            const grid = document.querySelector('.requests-grid');
+            if (!grid || !window.appData || !window.appData.requests) return;
+            
+            grid.innerHTML = '';
+            
+            let requests = window.appData.requests;
+            
+            // Фильтруем заявки по правам доступа
+            const user = getCurrentUser();
+            if (user) {
+                if (hasPermission('canViewAllRequests')) {
+                    // Показываем все заявки
+                    requests = window.appData.requests;
+                } else if (hasPermission('canViewOwnRequests')) {
+                    // Показываем только свои заявки
+                    requests = window.appData.requests.filter(r => r.createdBy === user.id);
+                } else {
+                    requests = [];
+                }
+            } else {
+                requests = [];
+            }
+            
+            requests.forEach(request => {
+                const card = createRequestCard(request);
+                grid.appendChild(card);
+            });
+        }
+
+        function createRequestCard(request) {
+            const card = document.createElement('div');
+            card.className = 'request-card';
+            card.dataset.requestId = request.id;
+            
+            const statusText = getStatusText(request.status);
+            const statusClass = `status-${request.status}`;
+            
+            card.innerHTML = `
+                <div class="request-header">
+                    <div class="request-id">#${request.id}</div>
+                    <div class="request-status ${statusClass}">${statusText}</div>
+                </div>
+                <div class="request-details">
+                    <p><strong>Материал:</strong> ${request.material}</p>
+                    <p><strong>Количество:</strong> ${request.quantity}</p>
+                    <p><strong>Тип ковша:</strong> ${request.bucketType}</p>
+                    <p><strong>Заказчик:</strong> ${request.customer}</p>
+                    <p><strong>Создана:</strong> ${request.createdDate}</p>
+                    ${request.amount ? `<p><strong>Сумма:</strong> ${request.amount.toLocaleString()} ₽</p>` : ''}
+                </div>
+                <div class="request-actions">
+                    <button class="btn btn-primary" onclick="showRequestDetails('${request.id}')">Просмотр</button>
+                    ${getActionButtons(request)}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function getActionButtons(request) {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return '';
+            
+            let buttons = '';
+            const isOwner = isRequestOwner(request.id);
+            
+            // Черновик - только владелец может редактировать и отправлять
+            if (request.status === 'draft') {
+                if (isOwner && hasPermission('canEditOwnRequest')) {
+                    buttons += `<button class="btn btn-primary" onclick="editRequest('${request.id}')">Редактировать</button>`;
+                }
+                if (isOwner && hasPermission('canSendRequest')) {
+                    buttons += `<button class="btn btn-success" onclick="sendRequest('${request.id}')">Отправить</button>`;
+                }
+            } 
+            // На согласовании - только менеджеры и админы могут утверждать/отклонять
+            else if (request.status === 'pending') {
+                if (hasPermission('canApproveRequest')) {
+                    buttons += `<button class="btn btn-success" onclick="approveRequest('${request.id}')">Утвердить</button>`;
+                }
+                if (hasPermission('canRejectRequest')) {
+                    buttons += `<button class="btn btn-warning" onclick="rejectRequest('${request.id}')">Отклонить</button>`;
+                }
+            } 
+            // Утверждена - только закупки и админы могут завершать
+            else if (request.status === 'approved') {
+                if (hasPermission('canCompleteRequest')) {
+                    buttons += `<button class="btn btn-success" onclick="completeRequest('${request.id}')">Завершить</button>`;
+                }
+            }
+            
+            // Удаление - только админы
+            if (hasPermission('canDeleteRequest')) {
+                buttons += `<button class="btn btn-danger" onclick="deleteRequestConfirm('${request.id}')">Удалить</button>`;
+            }
+            
+            return buttons;
+        }
+
+        function applyFilters() {
+            const status = document.querySelector('.filters select').value;
+            const bucketType = document.querySelectorAll('.filters select')[1].value;
+            const dateFrom = document.querySelectorAll('.filters input')[0].value;
+            const dateTo = document.querySelectorAll('.filters input')[1].value;
+            
+            const filters = { status, bucketType, dateFrom, dateTo };
+            const filtered = filterRequests(filters);
+            
+            const grid = document.querySelector('.requests-grid');
+            grid.innerHTML = '';
+            
+            filtered.forEach(request => {
+                const card = createRequestCard(request);
+                grid.appendChild(card);
+            });
+        }
+
+        function showRequestDetails(requestId) {
+            const request = window.appData.requests.find(r => r.id === requestId);
+            if (!request) return;
+            
+            const content = `
+                <div class="request-details">
+                    <p><strong>ID:</strong> ${request.id}</p>
+                    <p><strong>Материал:</strong> ${request.material}</p>
+                    <p><strong>Количество:</strong> ${request.quantity}</p>
+                    <p><strong>Тип ковша:</strong> ${request.bucketType}</p>
+                    <p><strong>Заказчик:</strong> ${request.customer}</p>
+                    <p><strong>Статус:</strong> ${getStatusText(request.status)}</p>
+                    <p><strong>Создана:</strong> ${request.createdDate}</p>
+                    ${request.amount ? `<p><strong>Сумма:</strong> ${request.amount.toLocaleString()} ₽</p>` : ''}
+                </div>
+            `;
+            
+            createModal('Детали заявки', content, [
+                { text: 'Закрыть', onclick: 'closeModal()', class: 'btn-primary' }
+            ]);
+        }
+
+        function sendRequest(requestId) {
+            if (!hasPermission('canSendRequest')) {
+                alert('У вас нет прав для выполнения этого действия.');
+                return;
+            }
+            if (!isRequestOwner(requestId)) {
+                alert('Вы можете отправлять только свои заявки.');
+                return;
+            }
+            const result = updateRequestStatus(requestId, 'pending');
+            if (result.success) {
+                alert('Заявка отправлена на согласование!');
+                updateRequestsList();
+            }
+        }
+
+        function approveRequest(requestId) {
+            if (!hasPermission('canApproveRequest')) {
+                alert('У вас нет прав для утверждения заявок.');
+                return;
+            }
+            const result = updateRequestStatus(requestId, 'approved');
+            if (result.success) {
+                alert('Заявка утверждена!');
+                updateRequestsList();
+            }
+        }
+
+        function rejectRequest(requestId) {
+            if (!hasPermission('canRejectRequest')) {
+                alert('У вас нет прав для отклонения заявок.');
+                return;
+            }
+            if (confirm('Вы уверены, что хотите отклонить эту заявку?')) {
+                const result = updateRequestStatus(requestId, 'rejected');
+                if (result.success) {
+                    alert('Заявка отклонена.');
+                    updateRequestsList();
+                }
+            }
+        }
+
+        function completeRequest(requestId) {
+            if (!hasPermission('canCompleteRequest')) {
+                alert('У вас нет прав для завершения заявок.');
+                return;
+            }
+            const result = updateRequestStatus(requestId, 'completed');
+            if (result.success) {
+                alert('Заявка завершена!');
+                updateRequestsList();
+            }
+        }
+
+        function deleteRequestConfirm(requestId) {
+            if (!hasPermission('canDeleteRequest')) {
+                alert('У вас нет прав для удаления заявок.');
+                return;
+            }
+            if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
+                const result = deleteRequest(requestId);
+                if (result.success) {
+                    alert('Заявка удалена.');
+                    updateRequestsList();
+                }
+            }
+        }
+
+        function editRequest(requestId) {
+            if (!hasPermission('canEditOwnRequest')) {
+                alert('У вас нет прав для редактирования заявок.');
+                return;
+            }
+            if (!isRequestOwner(requestId)) {
+                alert('Вы можете редактировать только свои заявки.');
+                return;
+            }
+            const request = window.appData.requests.find(r => r.id === requestId);
+            if (!request) return;
+            
+            showRequestForm(request);
+        }
+
+        function addCreateRequestButton() {
+            const pageHeader = document.querySelector('.page-header');
+            if (!pageHeader) return;
+            
+            // Проверяем права на создание заявки
+            if (!hasPermission('canCreateRequest')) {
+                return;
+            }
+            
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-success';
+            btn.style.cssText = 'margin-top: 10px;';
+            btn.textContent = '+ Создать новую заявку';
+            btn.onclick = () => showRequestForm();
+            pageHeader.appendChild(btn);
+        }
+
+        function showRequestForm(request = null) {
+            const isEdit = !!request;
+            const content = `
+                <form id="requestForm">
+                    <div class="form-group">
+                        <label for="req-material">Материал:</label>
+                        <input type="text" id="req-material" value="${request ? request.material : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="req-quantity">Количество:</label>
+                        <input type="text" id="req-quantity" value="${request ? request.quantity : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="req-bucketType">Тип ковша:</label>
+                        <select id="req-bucketType" required>
+                            <option value="">Выберите тип</option>
+                            <option value="Экскаваторный" ${request && request.bucketType.includes('Экскаваторный') ? 'selected' : ''}>Экскаваторный</option>
+                            <option value="Погрузочный" ${request && request.bucketType.includes('Погрузочный') ? 'selected' : ''}>Погрузочный</option>
+                            <option value="Карьерный" ${request && request.bucketType.includes('Карьерный') ? 'selected' : ''}>Карьерный</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="req-customer">Заказчик:</label>
+                        <input type="text" id="req-customer" value="${request ? request.customer : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="req-amount">Сумма (₽):</label>
+                        <input type="number" id="req-amount" value="${request ? request.amount : ''}">
+                    </div>
+                </form>
+            `;
+            
+            const modal = createModal(isEdit ? 'Редактировать заявку' : 'Создать новую заявку', content, [
+                { text: 'Отмена', onclick: 'closeModal()', class: 'btn-secondary' },
+                { text: isEdit ? 'Сохранить' : 'Создать', onclick: `saveRequestForm('${request ? request.id : ''}')`, class: 'btn-success' }
+            ]);
+        }
+
+        function saveRequestForm(requestId) {
+            const material = document.getElementById('req-material').value;
+            const quantity = document.getElementById('req-quantity').value;
+            const bucketType = document.getElementById('req-bucketType').value;
+            const customer = document.getElementById('req-customer').value;
+            const amount = parseFloat(document.getElementById('req-amount').value) || 0;
+            
+            if (!material || !quantity || !bucketType || !customer) {
+                alert('Заполните все обязательные поля!');
+                return;
+            }
+            
+            if (requestId) {
+                // Редактирование
+                const request = window.appData.requests.find(r => r.id === requestId);
+                if (request) {
+                    request.material = material;
+                    request.quantity = quantity;
+                    request.bucketType = bucketType;
+                    request.customer = customer;
+                    request.amount = amount;
+                    request.updatedAt = new Date().toISOString();
+                    saveData();
+                    alert('Заявка обновлена!');
+                    closeModal();
+                    updateRequestsList();
+                }
+            } else {
+                // Создание
+                const result = addRequest({ material, quantity, bucketType, customer, amount });
+                if (result.success) {
+                    alert('Заявка создана!');
+                    closeModal();
+                    updateRequestsList();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

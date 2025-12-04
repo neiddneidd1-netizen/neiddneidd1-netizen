@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Система управления заявками на материалы для ремонта ковшей</div>
+        </header>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="requests.html">Заявки</a></li>
+                <li><a href="materials.html">Материалы</a></li>
+                <li><a href="reports.html">Отчеты</a></li>
+                <li><a href="employees.html">Сотрудники</a></li>
+                <li><a href="profile.html" class="active">Личный кабинет</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-header">
+            <h1>Личный кабинет</h1>
+            <p>Управление профилем и персональными данными</p>
+        </div>
+
+        <div class="content">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-avatar" id="profileAvatar">АИ</div>
+                    <div class="profile-info">
+                        <h2 id="profileName">Загрузка...</h2>
+                        <span class="role-badge" id="profileRole">Загрузка...</span>
+                    </div>
+                    <ul class="profile-menu">
+                        <li><a href="#" onclick="showProfileSection('overview'); return false;" class="active" id="menu-overview">Обзор</a></li>
+                        <li><a href="#" onclick="showProfileSection('profile'); return false;" id="menu-profile">Профиль</a></li>
+                        <li><a href="#" onclick="showProfileSection('requests'); return false;" id="menu-requests">Мои заявки</a></li>
+                        <li id="manager-menu-item" class="hidden-menu-item"><a href="#" onclick="showProfileSection('manager'); return false;" id="menu-manager">Панель руководителя</a></li>
+                        <li id="procurement-menu-item" class="hidden-menu-item"><a href="#" onclick="showProfileSection('procurement'); return false;" id="menu-procurement">Панель закупок</a></li>
+                        <li><a href="#" onclick="showProfileSection('settings'); return false;" id="menu-settings">Настройки</a></li>
+                        <li id="admin-menu-item" class="hidden-menu-item"><a href="#" onclick="showProfileSection('admin'); return false;" id="menu-admin">Панель администратора</a></li>
+                    </ul>
+                </div>
+
+                <div class="profile-content">
+                    <!-- Обзор -->
+                    <div id="section-overview" class="profile-section active">
+                        <h2>Обзор</h2>
+                        <div class="stats-cards" id="overviewStats">
+                            <!-- Статистика будет загружена через JS -->
+                        </div>
+                    </div>
+
+                    <!-- Профиль -->
+                    <div id="section-profile" class="profile-section">
+                        <h2>Личные данные</h2>
+                        <div class="info-grid" id="profileInfo">
+                            <!-- Информация будет загружена через JS -->
+                        </div>
+                        <button class="btn btn-primary mt-20" onclick="editProfile()">Редактировать профиль</button>
+                    </div>
+
+                    <!-- Мои заявки -->
+                    <div id="section-requests" class="profile-section">
+                        <h2>Мои заявки</h2>
+                        <div class="my-requests" id="myRequestsList">
+                            <!-- Заявки будут загружены через JS -->
+                        </div>
+                    </div>
+
+                    <!-- Настройки -->
+                    <div id="section-settings" class="profile-section">
+                        <h2>Настройки</h2>
+                        <div class="edit-form">
+                            <div class="form-group">
+                                <label>Текущий пароль</label>
+                                <input type="password" id="currentPassword" placeholder="Введите текущий пароль">
+                            </div>
+                            <div class="form-group">
+                                <label>Новый пароль</label>
+                                <input type="password" id="newPassword" placeholder="Введите новый пароль">
+                            </div>
+                            <div class="form-group">
+                                <label>Подтверждение пароля</label>
+                                <input type="password" id="confirmPassword" placeholder="Повторите новый пароль">
+                            </div>
+                            <button class="btn btn-primary" onclick="changePassword()">Изменить пароль</button>
+                        </div>
+                    </div>
+
+                    <!-- Панель руководителя -->
+                    <div id="section-manager" class="profile-section">
+                        <h2>Панель руководителя</h2>
+                        <div class="admin-panel" id="managerPanel">
+                            <!-- Панель будет загружена через JS -->
+                        </div>
+                    </div>
+
+                    <!-- Панель закупок -->
+                    <div id="section-procurement" class="profile-section">
+                        <h2>Панель менеджера по закупкам</h2>
+                        <div class="admin-panel" id="procurementPanel">
+                            <!-- Панель будет загружена через JS -->
+                        </div>
+                    </div>
+
+                    <!-- Панель администратора -->
+                    <div id="section-admin" class="profile-section">
+                        <h2>Панель администратора</h2>
+                        <div class="admin-panel" id="adminPanel">
+                            <!-- Панель будет загружена через JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Система управления заявками "Ковшей-Сервис". Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Инициализация страницы профиля
+        document.addEventListener('DOMContentLoaded', function() {
+            initProfilePageHandler();
+        });
+    </script>
+</body>
+</html>
+

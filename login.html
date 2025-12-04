@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+    <div class="auth-container">
+        <!-- Левая панель с информацией -->
+        <div class="left-panel">
+            <h1>КОВШЕЙ-СЕРВИС</h1>
+            <p class="subtitle">Система управления заявками на материалы для ремонта ковшей</p>
+            <ul class="features-list">
+                <li>Управление заявками на материалы</li>
+                <li>Отслеживание статусов в реальном времени</li>
+                <li>Каталог материалов для ремонта</li>
+                <li>Автоматические уведомления</li>
+                <li>Подробная аналитика и отчеты</li>
+            </ul>
+        </div>
+
+        <!-- Правая панель с формами -->
+        <div class="right-panel">
+            <!-- Вкладки -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('login')">Вход</button>
+                <button class="tab" onclick="switchTab('register')">Регистрация</button>
+            </div>
+
+            <!-- Форма входа -->
+            <div class="form-container">
+                <div id="login-section" class="form-section active">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="your.email@kovshey-service.ru" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">Пароль</label>
+                            <input type="password" id="login-password" placeholder="Введите ваш пароль" required>
+                        </div>
+
+                        <div class="form-options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="remember-me">
+                                <label for="remember-me" class="checkbox-label">Запомнить меня</label>
+                            </div>
+                            <a href="#" class="forgot-password">Забыли пароль?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Войти в систему</button>
+
+                        <button type="button" class="btn btn-demo" id="demoLoginBtn">
+                            Демо-вход (Администратор)
+                        </button>
+
+                        <div class="demo-info">
+                            <strong>Демо-доступ:</strong> Нажмите кнопку выше для быстрого входа под учетной записью администратора с полными правами доступа.
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Форма регистрации -->
+                <div id="register-section" class="form-section">
+                    <div class="register-header-section">
+                        <h2>КОВШЕЙ-СЕРВИС</h2>
+                        <p>Регистрация в системе</p>
+                    </div>
+                    <form id="registerForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reg-firstName">Имя</label>
+                                <input type="text" id="reg-firstName" placeholder="Алексей" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-lastName">Фамилия</label>
+                                <input type="text" id="reg-lastName" placeholder="Иванов" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-email">Рабочий Email</label>
+                            <input type="email" id="reg-email" placeholder="ivanov@kovshey-service.ru" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-department">Отдел</label>
+                            <select id="reg-department" required>
+                                <option value="">Выберите отдел</option>
+                                <option value="welding">Цех сварки и наплавки</option>
+                                <option value="procurement">Отдел закупок</option>
+                                <option value="quality">ОТК</option>
+                                <option value="it">IT отдел</option>
+                                <option value="management">Руководство</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-position">Должность</label>
+                            <input type="text" id="reg-position" placeholder="Сварщик 5 разряда" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-password">Пароль</label>
+                            <input type="password" id="reg-password" placeholder="Создайте надежный пароль" required>
+                            <div class="password-requirements">
+                                <strong>Требования к паролю:</strong>
+                                <ul>
+                                    <li>Минимум 8 символов</li>
+                                    <li>Заглавные и строчные буквы</li>
+                                    <li>Цифры и специальные символы</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-confirmPassword">Подтверждение пароля</label>
+                            <input type="password" id="reg-confirmPassword" placeholder="Повторите пароль" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-group">
+                                <input type="checkbox" required>
+                                <span class="checkbox-label">Я согласен с <a href="#" class="link-primary">правилами использования</a> системы</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+
+                        <div class="register-links">
+                            <span>Уже есть аккаунт?</span>
+                            <a href="#" onclick="switchTab('login'); return false;" class="link-primary">Войти в систему</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Инициализация страницы входа/регистрации
+        document.addEventListener('DOMContentLoaded', function() {
+            initLoginPage();
+        });
+    </script>
+</body>
+</html>

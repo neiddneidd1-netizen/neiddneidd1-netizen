@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сотрудники - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Система управления заявками на материалы для ремонта ковшей</div>
+        </header>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="requests.html">Заявки</a></li>
+                <li><a href="materials.html">Материалы</a></li>
+                <li><a href="reports.html">Отчеты</a></li>
+                <li><a href="employees.html" class="active">Сотрудники</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-header">
+            <h1>Управление сотрудниками</h1>
+            <p>Список сотрудников и управление доступом к системе</p>
+        </div>
+
+        <div class="content">
+            <div class="controls">
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск сотрудников...">
+                    <button>Найти</button>
+                </div>
+                <button class="btn btn-success">+ Добавить сотрудника</button>
+            </div>
+
+            <div class="employees-grid">
+                <div class="employee-card">
+                    <div class="employee-header">
+                        <div class="employee-avatar">ИА</div>
+                        <div class="employee-info">
+                            <h3>Иванов Алексей Петрович</h3>
+                            <div class="employee-position">Сварщик 5 разряда</div>
+                        </div>
+                    </div>
+                    <div class="employee-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Отдел:</span>
+                            <span class="detail-value">Цех сварки и наплавки</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value">ivanov@kovshey-service.ru</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Роль:</span>
+                            <span class="role-badge role-employee">Сотрудник</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Статус:</span>
+                            <span class="status-badge status-active">Активен</span>
+                        </div>
+                    </div>
+                    <div class="employee-actions">
+                        <button class="btn btn-primary btn-sm">Редактировать</button>
+                        <button class="btn btn-warning btn-sm">Сбросить пароль</button>
+                    </div>
+                </div>
+
+                <div class="employee-card">
+                    <div class="employee-header">
+                        <div class="employee-avatar">ПС</div>
+                        <div class="employee-info">
+                            <h3>Петров Сергей Владимирович</h3>
+                            <div class="employee-position">Начальник цеха</div>
+                        </div>
+                    </div>
+                    <div class="employee-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Отдел:</span>
+                            <span class="detail-value">Цех сварки и наплавки</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value">petrov@kovshey-service.ru</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Роль:</span>
+                            <span class="role-badge role-manager">Руководитель</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Статус:</span>
+                            <span class="status-badge status-active">Активен</span>
+                        </div>
+                    </div>
+                    <div class="employee-actions">
+                        <button class="btn btn-primary btn-sm">Редактировать</button>
+                        <button class="btn btn-warning btn-sm">Сбросить пароль</button>
+                    </div>
+                </div>
+
+                <div class="employee-card">
+                    <div class="employee-header">
+                        <div class="employee-avatar">СМ</div>
+                        <div class="employee-info">
+                            <h3>Сидорова Мария Ивановна</h3>
+                            <div class="employee-position">Менеджер по закупкам</div>
+                        </div>
+                    </div>
+                    <div class="employee-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Отдел:</span>
+                            <span class="detail-value">Отдел закупок</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value">sidorova@kovshey-service.ru</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Роль:</span>
+                            <span class="role-badge role-procurement">Закупки</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Статус:</span>
+                            <span class="status-badge status-active">Активен</span>
+                        </div>
+                    </div>
+                    <div class="employee-actions">
+                        <button class="btn btn-primary btn-sm">Редактировать</button>
+                        <button class="btn btn-warning btn-sm">Сбросить пароль</button>
+                    </div>
+                </div>
+
+                <div class="employee-card">
+                    <div class="employee-header">
+                        <div class="employee-avatar">КД</div>
+                        <div class="employee-info">
+                            <h3>Козлов Дмитрий Анатольевич</h3>
+                            <div class="employee-position">Системный администратор</div>
+                        </div>
+                    </div>
+                    <div class="employee-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Отдел:</span>
+                            <span class="detail-value">IT отдел</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value">admin@kovshey-service.ru</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Роль:</span>
+                            <span class="role-badge role-admin">Администратор</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Статус:</span>
+                            <span class="status-badge status-active">Активен</span>
+                        </div>
+                    </div>
+                    <div class="employee-actions">
+                        <button class="btn btn-primary btn-sm">Редактировать</button>
+                        <button class="btn btn-warning btn-sm">Сбросить пароль</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="departments-stats">
+                <div class="department-stat">
+                    <div class="department-name">Цех сварки и наплавки</div>
+                    <div class="employee-count">8</div>
+                    <div>сотрудников</div>
+                </div>
+                <div class="department-stat">
+                    <div class="department-name">Отдел закупок</div>
+                    <div class="employee-count">3</div>
+                    <div>сотрудников</div>
+                </div>
+                <div class="department-stat">
+                    <div class="department-name">ОТК</div>
+                    <div class="employee-count">5</div>
+                    <div>сотрудников</div>
+                </div>
+                <div class="department-stat">
+                    <div class="department-name">IT отдел</div>
+                    <div class="employee-count">2</div>
+                    <div>сотрудников</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Система управления заявками "Ковшей-Сервис". Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.appData) {
+                loadData().then(() => initEmployeesPage());
+            } else {
+                initEmployeesPage();
+            }
+        });
+
+        function initEmployeesPage() {
+            // Проверка доступа к странице
+            if (!checkPageAccess(['manager', 'procurement', 'admin'])) {
+                return;
+            }
+            
+            updateEmployeesList();
+            
+            // Поиск
+            const searchInput = document.querySelector('.search-bar input');
+            const searchBtn = document.querySelector('.search-bar button');
+            searchBtn.addEventListener('click', () => {
+                const query = searchInput.value;
+                const filtered = searchEmployees(query);
+                displayEmployees(filtered);
+            });
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value;
+                    const filtered = searchEmployees(query);
+                    displayEmployees(filtered);
+                }
+            });
+
+            // Кнопка добавления (только для админов)
+            const addBtn = document.querySelector('.btn-success');
+            if (addBtn && hasPermission('canAddEmployee')) {
+                addBtn.addEventListener('click', () => showEmployeeForm());
+            } else if (addBtn) {
+                addBtn.style.display = 'none';
+            }
+        }
+
+        function updateEmployeesList() {
+            displayEmployees(window.appData.employees || []);
+        }
+
+        function displayEmployees(employees) {
+            const grid = document.querySelector('.employees-grid');
+            grid.innerHTML = '';
+            
+            employees.forEach(employee => {
+                const card = createEmployeeCard(employee);
+                grid.appendChild(card);
+            });
+        }
+
+        function createEmployeeCard(employee) {
+            const card = document.createElement('div');
+            card.className = 'employee-card';
+            const initials = (employee.firstName[0] + employee.lastName[0]).toUpperCase();
+            
+            card.innerHTML = `
+                <div class="employee-header">
+                    <div class="employee-avatar">${initials}</div>
+                    <div class="employee-info">
+                        <h3>${employee.lastName} ${employee.firstName} ${employee.middleName}</h3>
+                        <div class="employee-position">${employee.position}</div>
+                    </div>
+                </div>
+                <div class="employee-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Отдел:</span>
+                        <span class="detail-value">${employee.department}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Email:</span>
+                        <span class="detail-value">${employee.email}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Роль:</span>
+                        <span class="role-badge role-${employee.role}">${getRoleText(employee.role)}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Статус:</span>
+                        <span class="status-badge status-${employee.status}">${employee.status === 'active' ? 'Активен' : 'Неактивен'}</span>
+                    </div>
+                </div>
+                <div class="employee-actions">
+                    ${hasPermission('canEditEmployee') ? `<button class="btn btn-primary btn-sm" onclick="editEmployee('${employee.id}')">Редактировать</button>` : ''}
+                    ${hasPermission('canResetPassword') ? `<button class="btn btn-warning btn-sm" onclick="resetPassword('${employee.id}')">Сбросить пароль</button>` : ''}
+                </div>
+            `;
+            return card;
+        }
+
+        function showEmployeeForm(employee = null) {
+            const isEdit = !!employee;
+            const content = `
+                <form id="employeeForm">
+                    <div class="form-group">
+                        <label for="emp-firstName">Имя:</label>
+                        <input type="text" id="emp-firstName" value="${employee ? employee.firstName : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-lastName">Фамилия:</label>
+                        <input type="text" id="emp-lastName" value="${employee ? employee.lastName : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-middleName">Отчество:</label>
+                        <input type="text" id="emp-middleName" value="${employee ? employee.middleName : ''}">
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-position">Должность:</label>
+                        <input type="text" id="emp-position" value="${employee ? employee.position : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-department">Отдел:</label>
+                        <input type="text" id="emp-department" value="${employee ? employee.department : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-email">Email:</label>
+                        <input type="email" id="emp-email" value="${employee ? employee.email : ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emp-role">Роль:</label>
+                        <select id="emp-role" required>
+                            <option value="employee" ${employee && employee.role === 'employee' ? 'selected' : ''}>Сотрудник</option>
+                            <option value="manager" ${employee && employee.role === 'manager' ? 'selected' : ''}>Руководитель</option>
+                            <option value="procurement" ${employee && employee.role === 'procurement' ? 'selected' : ''}>Менеджер по закупкам</option>
+                            <option value="admin" ${employee && employee.role === 'admin' ? 'selected' : ''}>Администратор</option>
+                        </select>
+                    </div>
+                </form>
+            `;
+            
+            createModal(isEdit ? 'Редактировать сотрудника' : 'Добавить сотрудника', content, [
+                { text: 'Отмена', onclick: 'closeModal()', class: 'btn-secondary' },
+                { text: isEdit ? 'Сохранить' : 'Добавить', onclick: `saveEmployeeForm('${employee ? employee.id : ''}')`, class: 'btn-success' }
+            ]);
+        }
+
+        function saveEmployeeForm(employeeId) {
+            if (employeeId && !hasPermission('canEditEmployee')) {
+                alert('У вас нет прав для редактирования сотрудников.');
+                return;
+            }
+            if (!employeeId && !hasPermission('canAddEmployee')) {
+                alert('У вас нет прав для добавления сотрудников.');
+                return;
+            }
+            
+            const employeeData = {
+                firstName: document.getElementById('emp-firstName').value,
+                lastName: document.getElementById('emp-lastName').value,
+                middleName: document.getElementById('emp-middleName').value,
+                position: document.getElementById('emp-position').value,
+                department: document.getElementById('emp-department').value,
+                email: document.getElementById('emp-email').value,
+                role: document.getElementById('emp-role').value
+            };
+            
+            if (employeeId) {
+                const result = updateEmployee(employeeId, employeeData);
+                if (result.success) {
+                    alert('Сотрудник обновлен!');
+                    closeModal();
+                    updateEmployeesList();
+                }
+            } else {
+                const result = addEmployee(employeeData);
+                if (result.success) {
+                    alert('Сотрудник добавлен!');
+                    closeModal();
+                    updateEmployeesList();
+                }
+            }
+        }
+
+        function editEmployee(id) {
+            if (!hasPermission('canEditEmployee')) {
+                alert('У вас нет прав для редактирования сотрудников.');
+                return;
+            }
+            const employee = window.appData.employees.find(e => e.id === id);
+            if (employee) showEmployeeForm(employee);
+        }
+
+        function resetPassword(id) {
+            if (!hasPermission('canResetPassword')) {
+                alert('У вас нет прав для сброса паролей.');
+                return;
+            }
+            if (confirm('Сбросить пароль для этого сотрудника?')) {
+                const result = resetEmployeePassword(id);
+                if (result.success) {
+                    alert(`Пароль сброшен! Новый временный пароль: ${result.password}`);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

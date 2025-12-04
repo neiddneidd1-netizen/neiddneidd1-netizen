@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Ковшей-Сервис</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="register-page">
+    <div class="register-container">
+        <div class="register-header">
+            <div class="logo">КОВШЕЙ-СЕРВИС</div>
+            <div class="subtitle">Регистрация в системе</div>
+        </div>
+
+        <div class="register-form">
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Имя</label>
+                        <input type="text" id="firstName" placeholder="Алексей" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Фамилия</label>
+                        <input type="text" id="lastName" placeholder="Иванов" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Рабочий Email</label>
+                    <input type="email" id="email" placeholder="ivanov@kovshey-service.ru" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Отдел</label>
+                    <select id="department" required>
+                        <option value="">Выберите отдел</option>
+                        <option value="welding">Цех сварки и наплавки</option>
+                        <option value="procurement">Отдел закупок</option>
+                        <option value="quality">ОТК</option>
+                        <option value="it">IT отдел</option>
+                        <option value="management">Руководство</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Должность</label>
+                    <input type="text" id="position" placeholder="Сварщик 5 разряда" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" placeholder="Создайте надежный пароль" required>
+                    <div class="password-requirements">
+                        <strong>Требования к паролю:</strong>
+                        <ul>
+                            <li>• Минимум 8 символов</li>
+                            <li>• Заглавные и строчные буквы</li>
+                            <li>• Цифры и специальные символы</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Подтверждение пароля</label>
+                    <input type="password" id="confirmPassword" placeholder="Повторите пароль" required>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" required style="margin-right: 8px;">
+                        Я согласен с <a href="#" style="color: #3498db;">правилами использования</a> системы
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+
+                <div class="register-links">
+                    <span>Уже есть аккаунт?</span>
+                    <a href="login.html">Войти в систему</a>
+                </div>
+            </form>
+        </div>
+
+        <footer>
+            <p>© 2024 Ковшей-Сервис. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Ждем загрузки данных перед инициализацией формы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Загружаем данные если еще не загружены
+            if (!window.appData) {
+                loadData().then(() => {
+                    initRegisterForm();
+                });
+            } else {
+                initRegisterForm();
+            }
+        });
+
+        function initRegisterForm() {
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Пароли не совпадают!');
+                    return;
+                }
+                
+                // Проверка требований к паролю
+                if (password.length < 8) {
+                    alert('Пароль должен содержать минимум 8 символов!');
+                    return;
+                }
+                
+                // Собираем данные формы
+                const userData = {
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    middleName: '', // Можно добавить поле отчества в форму, если нужно
+                    email: document.getElementById('email').value.trim().toLowerCase(),
+                    password: password,
+                    department: document.getElementById('department').value,
+                    position: document.getElementById('position').value.trim()
+                };
+                
+                // Используем функцию из app.js
+                const result = registerUser(userData);
+                
+                if (result.success) {
+                    alert(result.message + '\n\nВаши данные:\nEmail: ' + userData.email + '\nПароль: (ваш введенный пароль)\n\nВы можете войти в систему прямо сейчас!');
+                    // Опционально: автоматический вход после регистрации
+                    const loginResult = loginUser(userData.email, userData.password);
+                    if (loginResult.success) {
+                        window.location.href = 'index.html';
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                } else {
+                    alert('Ошибка регистрации: ' + result.message);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
